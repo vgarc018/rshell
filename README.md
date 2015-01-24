@@ -14,10 +14,8 @@ From your terminal run the following:
 and you will be ready to run the program.
 
 ##Known Bugs:
-1.
-2.
-3.
-4.
-5
+1. If you type in ;;;;;;;;&&&&&&&||||||||||| you will get a segmentation fault.
+2. If you pass in the command true && true || false you will get a memory error
+
 
 
