@@ -2,6 +2,8 @@
 #include <dirent.h>
 #include <errno.h>
 #include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -13,7 +15,13 @@ using namespace std;
 
 int main()
 {
-    char *dirName = ".";
+    string line;
+    getline(cin,line);
+
+    cout << line << endl;
+
+
+    char *dirName = line;
     DIR *dirp = opendir(dirName);
     dirent *direntp;
     while ((direntp = readdir(dirp)))
