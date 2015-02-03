@@ -18,18 +18,18 @@ void aFlag(const char *file)
     }
     else
     {
-        int direntp;
-        struct dirent *prevEntry = NULL;
-        struct dirent **dirEntry = NULL;
-        if((readdir_r(dirp,prevEntry,dirEntry)) != 0)
+        dirent *direntp;
+       // struct dirent *prevEntry = NULL;
+       // struct dirent **dirEntry = NULL;
+        if(readdir(dirp) == NULL )
         {
             perror("reading dir");
             exit(1);
         }
         else
         {
-
-            while(!(direntp = readdir_r(dirp, prevEntry, dirEntry )))
+           cerr << "its while" << endl;
+            while((direntp = readdir(dirp)))
             {
                 cout << "It worked" << endl;
             }
