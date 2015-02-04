@@ -106,7 +106,10 @@ int main(int argc, char **argv)
 
     if(!filenames.empty() && !a)
     {
-        noFlags(filenames.at(0));
+       for(unsigned int i= 0; i < filenames.size(); i++)
+       {
+           noFlags(filenames.at(i));
+       }
     }
     if(argc == 1)
     {
@@ -114,7 +117,11 @@ int main(int argc, char **argv)
     }
     if(a)
     {
-        aFlag(filenames.at(0));
+       for(unsigned int i = 0; i < filenames.size(); ++i)
+        {
+            cout << filenames.at(i) << ":" << endl;
+            aFlag(filenames.at(i));
+        }
     }
     return 0;
 }
