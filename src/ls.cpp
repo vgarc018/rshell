@@ -10,6 +10,27 @@
 
 using namespace std;
 
+bool isDir(const char *name)
+{
+    struct stat s;
+    if((stat(name, &s)) != 0)
+    {
+        perror("Stat error");
+        return false;
+    }
+    else
+    {
+        if(S_ISDIR(s.st_mode))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
 
 void aFlag(const char *file)
 {
@@ -36,7 +57,6 @@ void aFlag(const char *file)
                 cout << entry->d_name << endl;
             }
         }
-
     }
 }
 
@@ -70,15 +90,55 @@ void noFlags(const char *file)
                 }
             }
         }
-
     }
 }
 
+void lFlag(const char *filename, bool flag)
+{
+    struct stat s;
+    DIR *dir;
+    dirent *entry;
+    bool direc = isDir(filename);
+   if(direc)
+   {
+        if((dir = opendir(filename)) == NULL)
+        {
+            perror("open directory");
+            return;
+        }
+   }
+    else
+    {
+        while((entry = readdir(dir)))
+        {
+           //ntry =  readdir(dir);
+            if(errno != 0)
+            {
+                perror("reading file");
+                return;
+            }
+            else
+            {
+                if( (stat(entry->d_name, &s)) != 0)
+                {
+                    perror("Stat Error");
+                    return;
+                }
+                else
+                {
+                    cout << ((s.st_mode & S_IRUSR) ? "r":"-");
+                    cout << ((s.st_mode & S_IWUSR) ? "w":"-");
+                    cout << ((s.st_mode & S_IXUSR) ? "x":"-");
+                }
+            }
+         }
+      }
+}
 
 int main(int argc, char **argv)
 {
     bool a = false;
-   // bool l = false;
+    bool l = false;
    // bool R = false;
     string dot = ".";
     vector< char* > filenames;
@@ -91,7 +151,7 @@ int main(int argc, char **argv)
         }
         else if(argv[i][1] == 'l')
         {
-          //  l = true;
+            l = true;
         }
         else if(argv[i][1] == 'R')
         {
@@ -122,6 +182,11 @@ int main(int argc, char **argv)
             cout << filenames.at(i) << ":" << endl;
             aFlag(filenames.at(i));
         }
+    }
+    if(l)
+    {
+        string test = "ls.cpp";
+        lFlag(test.c_str(), a);
     }
     return 0;
 }
