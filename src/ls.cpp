@@ -6,41 +6,13 @@
 #include <vector>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <stdio.h>
 
 using namespace std;
 
 
 void aFlag(const char *file)
 {
-    DIR *dirp; 
-    if((dirp = opendir(file)) == NULL) 
-    {
-        perror("Open Dir");
-        return;
-    }
-    else
-    {
-        dirent *direntp;
-        bool test = true;
-        while(test)
-        {
-            if((direntp = readdir(dirp)) == NULL)
-            {
-                perror("Reading File");
-                test = false;
-            }
-            else
-            {    
-                cout << direntp->d_name  << endl;
-            }
-        }
-        closedir(dirp);
-    }
-}
-
-void noFlags()
-{
-    const char file[] = {'.'}; 
     DIR *dir;
     dirent *entry;
 
@@ -51,7 +23,6 @@ void noFlags()
     }
     else
     {
-        bool res = true;
         while((entry = readdir(dir)))
         {
            //ntry =  readdir(dir);
@@ -69,23 +40,71 @@ void noFlags()
     }
 }
 
+void noFlags()
+{
+    string dot = ".";
+    const char *file = dot.c_str();
+    DIR *dir;
+    dirent *entry;
+
+    if((dir = opendir(file)) == NULL)
+    {
+        perror("open directory");
+        return;
+    }
+    else
+    {
+        while((entry = readdir(dir)))
+        {
+           //ntry =  readdir(dir);
+            if(errno != 0)
+            {
+                perror("reading file");
+                return;
+            }
+            else
+            {
+                if(entry->d_name[0] != '.')
+                {
+                     cout << entry->d_name << endl;
+                }
+            }
+        }
+
+    }
+}
+
 
 int main(int argc, char **argv)
 {
-    //const char *file = argv[0][0];
+    bool a = false;
+   // bool l = false;
+   // bool R = false;
+    string test = ".";
 
-    //aFlag(file);
-    noFlags();
+    for(int i = 0; i < argc; i++)
+    {
+        if(argv[i][1] == 'a')
+        {
+            a = true;
+        }
+        if(argv[i][0] == 'l')
+        {
+          //  l = true;
+        }
+        if(argv[i][0] == 'R')
+        {
+           // R = true;
+        }
+    }
 
+    if(argc == 1){
+        noFlags();
+        return 0;
+    }
+    if(a)
+    {
+        aFlag(test.c_str());
+    }
     return 0;
-    //cout << line << endl;
-
-
-   /* const char *dirName = line.c_str();
-    DIR *dirp = opendir(dirName);
-    dirent *direntp;
-    while ((direntp = readdir(dirp)))
-          cout << direntp->d_name << endl;  // use stat here to find attributes of file
-    closedir(dirp);
-    */
 }
