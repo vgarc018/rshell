@@ -10,6 +10,15 @@
 
 using namespace std;
 
+
+
+void notDir(const char *file, char flag)
+{
+    
+}
+
+
+
 bool isDir(const char *name)
 {
     struct stat s;
@@ -99,19 +108,17 @@ void lFlag(const char *filename, bool flag)
     DIR *dir;
     dirent *entry;
     bool direc = isDir(filename);
-   if(direc)
-   {
-        if((dir = opendir(filename)) == NULL)
-        {
-            perror("open directory");
-            return;
-        }
-   }
+   if(direc) notDir(filename, 'l');
+   
+    if((dir = opendir(filename)) == NULL)
+    {
+        perror("open directory");
+        return;
+    }
     else
     {
         while((entry = readdir(dir)))
         {
-           //ntry =  readdir(dir);
             if(errno != 0)
             {
                 perror("reading file");
