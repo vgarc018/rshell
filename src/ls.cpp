@@ -40,10 +40,10 @@ void aFlag(const char *file)
     }
 }
 
-void noFlags()
+void noFlags(const char *file)
 {
-    string dot = ".";
-    const char *file = dot.c_str();
+   // string dot = ".";
+   // const char *file = dot.c_str();
     DIR *dir;
     dirent *entry;
 
@@ -80,7 +80,7 @@ int main(int argc, char **argv)
     bool a = false;
    // bool l = false;
    // bool R = false;
-    string test = ".";
+    string dot = ".";
     vector< char* > filenames;
 
     for(int i = 1; i < argc; i++)
@@ -104,9 +104,13 @@ int main(int argc, char **argv)
 
     }
 
-    if(argc == 1){
-        noFlags();
-        return 0;
+    if(!filenames.empty() && !a)
+    {
+        noFlags(filenames.at(0));
+    }
+    if(argc == 1)
+    {
+        noFlags(dot.c_str());
     }
     if(a)
     {
