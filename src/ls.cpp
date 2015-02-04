@@ -55,7 +55,7 @@ void noFlags()
         while((entry = readdir(dir)))
         {
            //ntry =  readdir(dir);
-            if(errno)
+            if(errno != 0)
             {
                 perror("reading file");
                 return;
