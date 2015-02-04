@@ -81,21 +81,27 @@ int main(int argc, char **argv)
    // bool l = false;
    // bool R = false;
     string test = ".";
+    vector< char* > filenames;
 
-    for(int i = 0; i < argc; i++)
+    for(int i = 1; i < argc; i++)
     {
         if(argv[i][1] == 'a')
         {
             a = true;
         }
-        if(argv[i][0] == 'l')
+        else if(argv[i][1] == 'l')
         {
           //  l = true;
         }
-        if(argv[i][0] == 'R')
+        else if(argv[i][1] == 'R')
         {
            // R = true;
         }
+        else
+        {
+            filenames.push_back(argv[i]);
+        }
+
     }
 
     if(argc == 1){
@@ -104,7 +110,7 @@ int main(int argc, char **argv)
     }
     if(a)
     {
-        aFlag(test.c_str());
+        aFlag(filenames.at(0));
     }
     return 0;
 }
