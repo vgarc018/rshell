@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sys/stat.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -14,39 +16,66 @@ void aFlag(const char *file)
     if((dirp = opendir(file)) == NULL) 
     {
         perror("Open Dir");
-        exit(1);
+        return;
     }
     else
     {
         dirent *direntp;
-       // struct dirent *prevEntry = NULL;
-       // struct dirent **dirEntry = NULL;
-        if(readdir(dirp) == NULL )
+        bool test = true;
+        while(test)
         {
-            perror("reading dir");
-            exit(1);
-        }
-        else
-        {
-           cerr << "its while" << endl;
-            while((direntp = readdir(dirp)))
+            if((direntp = readdir(dirp)) == NULL)
             {
-                cout << "It worked" << endl;
+                perror("Reading File");
+                test = false;
             }
-            closedir(dirp);
+            else
+            {    
+                cout << direntp->d_name  << endl;
+            }
         }
+        closedir(dirp);
+    }
+}
+
+void noFlags()
+{
+    const char file[] = {'.'}; 
+    DIR *dir;
+    dirent *entry;
+
+    if((dir = opendir(file)) == NULL)
+    {
+        perror("open directory");
+        return;
+    }
+    else
+    {
+        bool res = true;
+        while((entry = readdir(dir)))
+        {
+           //ntry =  readdir(dir);
+            if(errno)
+            {
+                perror("reading file");
+                return;
+            }
+            else
+            {
+                cout << entry->d_name << endl;
+            }
+        }
+
     }
 }
 
 
-int main()
+int main(int argc, char **argv)
 {
-    string line;
-    getline(cin,line);
+    //const char *file = argv[0][0];
 
-    const char *filename = line.c_str();
-    aFlag(filename);
-
+    //aFlag(file);
+    noFlags();
 
     return 0;
     //cout << line << endl;
