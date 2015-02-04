@@ -14,7 +14,29 @@ using namespace std;
 
 void notDir(const char *file, char flag)
 {
-    
+    struct stat s;
+    if((stat(file, &s)) != 0)
+    {
+        perror("Stat Error");
+        return;
+    }
+    else
+    {
+        if(flag == 'l')
+        {
+             cout << ((s.st_mode & S_IRUSR) ? "r":"-");
+             cout << ((s.st_mode & S_IWUSR) ? "w":"-");
+             cout << ((s.st_mode & S_IXUSR) ? "x":"-");
+             cout << ((s.st_mode & S_IRGRP) ? "r":"-");
+             cout << ((s.st_mode & S_IWGRP) ? "w":"-");
+             cout << ((s.st_mode & S_IXGRP) ? "x":"-");
+             cout << ((s.st_mode & S_IROTH) ? "r":"-");
+             cout << ((s.st_mode & S_IWOTH) ? "w":"-");
+             cout << ((s.st_mode & S_IXOTH) ? "x":"-");
+
+
+        }
+    }
 }
 
 
@@ -108,8 +130,12 @@ void lFlag(const char *filename, bool flag)
     DIR *dir;
     dirent *entry;
     bool direc = isDir(filename);
-   if(direc) notDir(filename, 'l');
-   
+   if(direc)
+    {
+        notDir(filename, 'l');
+        return;
+    }
+
     if((dir = opendir(filename)) == NULL)
     {
         perror("open directory");
