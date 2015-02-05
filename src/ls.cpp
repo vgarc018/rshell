@@ -33,8 +33,10 @@ void notDir(const char *file, char flag)
              cout << ((s.st_mode & S_IROTH) ? "r":"-");
              cout << ((s.st_mode & S_IWOTH) ? "w":"-");
              cout << ((s.st_mode & S_IXOTH) ? "x":"-");
-
-
+        }
+        else
+        {
+            cout << file << endl;
         }
     }
 }
@@ -51,7 +53,7 @@ bool isDir(const char *name)
     }
     else
     {
-        if(S_ISDIR(s.st_mode))
+        if(S_ISREG(s.st_mode))
         {
             return true;
         }
@@ -67,7 +69,13 @@ void aFlag(const char *file)
 {
     DIR *dir;
     dirent *entry;
-
+    bool direc = isDir(file);
+    if(direc)
+    {
+        notDir(file, 'f');
+        return;
+    }
+ 
     if((dir = opendir(file)) == NULL)
     {
         perror("open directory");
@@ -97,7 +105,13 @@ void noFlags(const char *file)
    // const char *file = dot.c_str();
     DIR *dir;
     dirent *entry;
-
+    bool direc = isDir(file);
+    if(direc)
+    {
+        notDir(file, 'f');
+        return;
+    }
+    
     if((dir = opendir(file)) == NULL)
     {
         perror("open directory");
@@ -212,7 +226,7 @@ int main(int argc, char **argv)
     {
        for(unsigned int i = 0; i < filenames.size(); ++i)
         {
-            cout << filenames.at(i) << ":" << endl;
+           if(filenames.size() > 1) cout << filenames.at(i) << ":" << endl;
             aFlag(filenames.at(i));
         }
     }
