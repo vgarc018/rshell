@@ -262,7 +262,7 @@ void lFlag(const char *filename, bool flag)
 						
 						if(entry->d_name[0] != '.')
 						{
-							if( (stat(entry->d_name, &s)) != 0)
+							if( (stat(filepath, &s)) != 0)
 							{
 								perror("Stat Error");
 								return;
