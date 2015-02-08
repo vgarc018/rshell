@@ -284,7 +284,7 @@ void lFlag(const char *filename, bool flag)
 									perror(" getting group");
 								}
 
-								cout <<( !direc ? "-":"d");
+								cout <<( direc ? "d" : "-");
 								cout << ((s.st_mode & S_IRUSR) ? "r":"-");
 								cout << ((s.st_mode & S_IWUSR) ? "w":"-");
 								cout << ((s.st_mode & S_IXUSR) ? "x":"-");
@@ -325,12 +325,83 @@ void lFlag(const char *filename, bool flag)
 	}
 }
 
-void Rflag(const char *filename)
+void Rflag(const char *filename,char flag, char flag2)
 {
     vector<char*> dirs;
     DIR *dir;
-    dirent *direntp;
-    
+    dirent *entry;
+   if((dir = opendir(filename)) == NULL)
+   {
+       perror("open dir");
+       return;
+   }
+   
+   cout << filename << ":" << endl;
+
+   while((entry = readdir(dir)))
+   {
+        struct stat s;
+
+        char filepath[1024];
+        string dash = "/";
+        strcpy(filepath, filename);
+        strcat(filepath, dash.c_str());
+        strcat(filepath, entry->d_name);
+        if((stat(filepath, &s)) == -1)
+        {
+            perror("Stat Error");
+            return;
+        }
+        if((flag == 'a' || flag2 == 'a') && (flag != 'l' && flag2 != 'l')) 
+        {
+            aFlag(entry->d_name);
+        }
+        else if( flag == 'l' || flag2 == 'l')
+        {
+            if(flag2 == 'a' || flag == 'a')
+            {
+                lFlag(entry->d_name, true);
+            }
+            else
+            {
+                lFlag(entry->d_name, false);
+            }
+        }
+        else
+        {
+            cout << entry->d_name << endl;
+        }
+        if(S_ISDIR(s.st_mode))
+        {
+            dirs.push_back(entry->d_name);
+        }
+   }
+   if(errno != 0)
+   {
+       perror("Reading Dir");
+       return;
+   }
+
+   cout << endl;
+   cout << endl;
+
+   for(size_t i = 0; i < dirs.size(); i++)
+   {
+       char dir[1024];
+       string dash = "/";
+       strcpy(dir, filename);
+       strcat(dir, dash.c_str());
+       strcat(dir, dirs.at(i));
+       Rflag(dir, flag, flag2);
+   }
+
+   if((closedir(dir)) == -1)
+   {
+       perror("Closing dir");
+   }
+   
+   return;
+
 }
 
 int main(int argc, char **argv)
@@ -339,6 +410,7 @@ int main(int argc, char **argv)
     bool l = false;
     bool al= false;
     bool flags = false;
+    bool R = false;
     string dot = ".";
     vector< char* > filenames;
 
@@ -365,7 +437,8 @@ int main(int argc, char **argv)
         }
         else if(argv[i][1] == 'R')
         {
-           // R = true;
+            flags = true;
+            R = true;
         }
         else
         {
@@ -374,6 +447,10 @@ int main(int argc, char **argv)
 
     }
 
+    if(a && l)
+    {
+        al = true;
+    }
     //cout << filenames.at(0);
     if(!filenames.empty() && !flags)
     {
@@ -411,6 +488,20 @@ int main(int argc, char **argv)
            if(filenames.size() > 1) cout << filenames.at(i) << ":" << endl;
          //  cout << filenames.at(i) << endl;
            lFlag(filenames.at(i), al);
+        }
+
+    }
+    if(R)
+    {
+         if(filenames.empty())
+        {
+            Rflag(dot.c_str(),' ' , ' ');
+        }
+        for(unsigned int i = 0; i < filenames.size(); ++i)
+        {
+           if(filenames.size() > 1) cout << filenames.at(i) << ":" << endl;
+         //  cout << filenames.at(i) << endl;
+           Rflag(filenames.at(i), ' ', ' ');
         }
 
     }
