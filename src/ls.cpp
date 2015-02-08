@@ -325,6 +325,14 @@ void lFlag(const char *filename, bool flag)
 	}
 }
 
+void Rflag(const char *filename)
+{
+    vector<char*> dirs;
+    DIR *dir;
+    dirent *direntp;
+    
+}
+
 int main(int argc, char **argv)
 {
     bool a = false;
