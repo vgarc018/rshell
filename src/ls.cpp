@@ -287,7 +287,7 @@ void lFlag(const char *filename, bool flag)
 							    perror(" getting group");
 						    }
 
-						    cout <<( !direc ? "-":"d");
+						    cout << ((S_ISDIR(s.st_mode)) ? "-":"d");
 						    cout << ((s.st_mode & S_IRUSR) ? "r":"-");
 						    cout << ((s.st_mode & S_IWUSR) ? "w":"-");
 						    cout << ((s.st_mode & S_IXUSR) ? "x":"-");
@@ -341,7 +341,7 @@ void lFlag(const char *filename, bool flag)
 									perror(" getting group");
 								}
 
-								cout <<( direc ? "d" : "-");
+								cout <<((S_ISDIR(s.st_mode))  ? "d" : "-");
 								cout << ((s.st_mode & S_IRUSR) ? "r":"-");
 								cout << ((s.st_mode & S_IWUSR) ? "w":"-");
 								cout << ((s.st_mode & S_IXUSR) ? "x":"-");
