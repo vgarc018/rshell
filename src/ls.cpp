@@ -359,13 +359,12 @@ void Rflag(const char *filename)
 		{
 			dirs.push_back(entry->d_name);
 		}
-		cout << endl;
 	}
 	if(errno != 0)
 	{
 		perror("reading Dir");
 	}
-	
+    cout << endl;	
 	int vecsize = dirs.size();
 	
 	for(int i = 0; i < vecsize; ++i)
@@ -385,6 +384,169 @@ void Rflag(const char *filename)
 	return;
 }
 
+void aRflag(const char *filename)
+{
+    vector<char*> dirs;
+    DIR *dir;
+    dirent *entry;
+     struct stat s;
+    if((dir = opendir(filename)) == NULL)
+    {
+		perror("Open Dir");
+	}
+	cout << filename << ":" << endl;
+	while((entry = readdir(dir)))
+	{
+		char filepath[1024];
+		strcpy(filepath, filename);
+        string slash = "/";
+        strcat(filepath, slash.c_str());
+        strcat(filepath, entry->d_name);
+        
+        if((stat(filepath, &s)) == -1)
+        {
+			perror("Stat Error");
+		}
+        cout << entry->d_name << endl;
+		
+		if( entry->d_name[0] == '.' && entry->d_name[1] == '.')
+		{
+			continue;
+		}
+		
+		if(S_ISDIR(s.st_mode))
+		{
+			dirs.push_back(entry->d_name);
+		}
+	}
+	if(errno != 0)
+	{
+		perror("reading Dir");
+	}
+    cout << endl;	
+	int vecsize = dirs.size();
+	
+	for(int i = 0; i < vecsize; ++i)
+	{
+		char filepath[1024];
+		strcpy(filepath, filename);
+        string slash = "/";
+        strcat(filepath, slash.c_str());
+        strcat(filepath, dirs[i]);
+        Rflag(filepath);
+	}
+	if((closedir(dir) == -1))
+	{
+		perror("Closing Dir");
+	}
+	
+	return;
+}
+
+void alRflag(const char *filename)
+{
+    vector<char*> dirs;
+    DIR *dir;
+    dirent *entry;
+     struct stat s;
+    if((dir = opendir(filename)) == NULL)
+    {
+		perror("Open Dir");
+	}
+	cout << filename << ":" << endl;
+	while((entry = readdir(dir)))
+	{
+		char filepath[1024];
+		strcpy(filepath, filename);
+        string slash = "/";
+        strcat(filepath, slash.c_str());
+        strcat(filepath, entry->d_name);
+        
+        if((stat(filepath, &s)) == -1)
+        {
+			perror("Stat Error");
+		}
+			if( (stat(filepath, &s)) != 0)
+			{
+					perror("Stat Error");
+					return;
+			}
+			else
+			{
+				register struct passwd *pw;
+				register struct group *reg;
+				pw = getpwuid(s.st_uid);
+				char buf [80];
+				
+				if(!pw)
+				{
+					perror(" getting username" );
+				}
+				reg = getgrgid(s.st_gid);
+				if(!reg)
+				{
+					perror(" getting group");
+				}
+
+				cout << ((S_ISDIR(s.st_mode)) ? "d":"-");
+				cout << ((s.st_mode & S_IRUSR) ? "r":"-");
+				cout << ((s.st_mode & S_IWUSR) ? "w":"-");
+				cout << ((s.st_mode & S_IXUSR) ? "x":"-");
+				cout << ((s.st_mode & S_IRGRP) ? "r":"-");
+				cout << ((s.st_mode & S_IWGRP) ? "w":"-");
+				cout << ((s.st_mode & S_IXGRP) ? "x":"-");
+				cout << ((s.st_mode & S_IROTH) ? "r":"-");
+				cout << ((s.st_mode & S_IWOTH) ? "w":"-");
+				cout << ((s.st_mode & S_IXOTH) ? "x":"-");
+				cout << " " << s.st_nlink << " ";
+				cout << setw(5);
+				cout << pw->pw_name << " ";
+				cout << setw(5);
+				cout << reg->gr_name << " ";
+				cout << setw(6);
+				cout << s.st_size << " ";
+				cout << setw(3);
+				struct tm *timeinfo;
+				timeinfo = localtime (&s.st_mtime);
+				strftime(buf,80,  "%b %d  %I:%M ", timeinfo);
+				printf("%s",buf);
+				cout << setw(5);
+				cout << entry->d_name  << endl;
+			}	
+		if(entry->d_name[0] == '.')
+		{
+			continue;
+		}
+		
+		if(S_ISDIR(s.st_mode))
+		{
+			dirs.push_back(entry->d_name);
+		}
+	}
+	if(errno != 0)
+	{
+		perror("reading Dir");
+	}
+    cout << endl;	
+	int vecsize = dirs.size();
+	
+	for(int i = 0; i < vecsize; ++i)
+	{
+		char filepath[1024];
+		strcpy(filepath, filename);
+        string slash = "/";
+        strcat(filepath, slash.c_str());
+        strcat(filepath, dirs[i]);
+        Rflag(filepath);
+	}
+	if((closedir(dir) == -1))
+	{
+		perror("Closing Dir");
+	}
+	
+	return;
+
+}
 
 int main(int argc, char **argv)
 {
@@ -512,14 +674,14 @@ int main(int argc, char **argv)
             aFlag(dot.c_str());
         }
     }
-    /*
+    
     if(a && l && !R)
     {
-        if(filesize > 1)
+        if(filesize >= 1)
         {
             for(int i = 0; i < filesize; ++i)
             {
-                cout << filenames[i] << ":" << endl;
+                if(filesize > 1) cout << filenames[i] << ":" << endl;
                 lFlag(filenames[i], true);
                 cout << endl;
             }
@@ -529,39 +691,40 @@ int main(int argc, char **argv)
             lFlag(dot.c_str(), true);
         }
     }
-
+    
     if(a && R && !l)
     {
-        if(filesize > 1)
+        if(filesize >= 1)
         {
             for(int i = 0; i < filesize; ++i)
             {
-                cout << filenames[i] << ":" << endl;
-                Rflag(filenames[i], true, false);
+                if(filesize >1) cout << filenames[i] << ":" << endl;
+                aRflag(filenames[i]);
                 cout << endl;
             }
         }
         else
         {
-            Rflag(dot.c_str(), true, false);
+            aRflag(dot.c_str());
         }
     }
+    
     if(R && l && !a)
     {
-         if(filesize > 1)
+         if(filesize >= 1)
         {
             for(int i = 0; i < filesize; ++i)
             {
-                cout << filenames[i] << ":" << endl;
-                Rflag(filenames[i], false, true);
-                cout << endl;
+                if(filesize > 1) cout << filenames[i] << ":" << endl;
+                lRflag(filenames[i]);
             }
         }
         else
         {
-            Rflag(dot.c_str(), false, true);
+            lRflag(dot.c_str());
         }
     }
+    /*
     if( a && R && l)
     {
         if(filesize > 1)
