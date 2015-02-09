@@ -447,17 +447,16 @@ int main(int argc, char **argv)
         }
     }
 
-
+   // cout << filenames[0] << endl;
     int filesize = filenames.size();
     if(!a && !l && !R)
     {
-        if(filesize > 1)
+        if(filesize >= 1)
         {
             for(int i = 0; i < filesize; ++i)
             {
-                cout << filenames[i] << ":" << endl;
+                if(filesize > 1) cout << filenames[i] << ":" << endl;
                 noFlags(filenames[i]);
-                cout << endl;
             }
         }
         else
@@ -468,13 +467,12 @@ int main(int argc, char **argv)
 
     if( l && !a && !R)
     {
-         if(filesize > 1)
+         if(filesize >= 1)
         {
             for(int i = 0; i < filesize; ++i)
             {
-                cout << filenames[i] << ":" << endl;
+                if(filesize > 1) cout << filenames[i] << ":" << endl;
                 lFlag(filenames[i], false);
-                cout << endl;
             }
         }
         else
@@ -485,13 +483,12 @@ int main(int argc, char **argv)
 
     if( R && !a && !l)
     {
-         if(filesize > 1)
+         if(filesize >= 1)
         {
             for(int i = 0; i < filesize; ++i)
             {
-                cout << filenames[i] << ":" << endl;
+               if(filesize> 1) cout << filenames[i] << ":" << endl;
                 Rflag(filenames[i]);
-                cout << endl;
             }
         }
         else
@@ -499,16 +496,15 @@ int main(int argc, char **argv)
             Rflag(dot.c_str());
         }
     }
-    /*
+    
     if( a && !l && !R)
     {
-        if(filesize > 1)
+        if(filesize >= 1)
         {
             for(int i = 0; i < filesize; ++i)
             {
-                cout << filenames[i] << ":" << endl;
+               if(filesize > 1) cout << filenames[i] << ":" << endl;
                 aFlag(filenames[i]);
-                cout << endl;
             }
         }
         else
@@ -516,6 +512,7 @@ int main(int argc, char **argv)
             aFlag(dot.c_str());
         }
     }
+    /*
     if(a && l && !R)
     {
         if(filesize > 1)
