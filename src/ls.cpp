@@ -325,7 +325,7 @@ void lFlag(const char *filename, bool flag)
 	}
 }
 
-void Rflag(const char *filename,char flag, char flag2)
+void Rflag(const char *filename)
 {
     vector<char*> dirs;
     DIR *dir;
@@ -352,24 +352,11 @@ void Rflag(const char *filename,char flag, char flag2)
             perror("Stat Error");
             return;
         }
-        if((flag == 'a' || flag2 == 'a') && (flag != 'l' && flag2 != 'l')) 
+
+        cout << entry->d_name << endl;
+        if(entry->d_name[0] == '0')
         {
-            aFlag(entry->d_name);
-        }
-        else if( flag == 'l' || flag2 == 'l')
-        {
-            if(flag2 == 'a' || flag == 'a')
-            {
-                lFlag(entry->d_name, true);
-            }
-            else
-            {
-                lFlag(entry->d_name, false);
-            }
-        }
-        else
-        {
-            cout << entry->d_name << endl;
+            continue;
         }
         if(S_ISDIR(s.st_mode))
         {
@@ -392,7 +379,7 @@ void Rflag(const char *filename,char flag, char flag2)
        strcpy(dir, filename);
        strcat(dir, dash.c_str());
        strcat(dir, dirs.at(i));
-       Rflag(dir, flag, flag2);
+       Rflag(dir);
    }
 
    if((closedir(dir)) == -1)
@@ -404,106 +391,201 @@ void Rflag(const char *filename,char flag, char flag2)
 
 }
 
+
 int main(int argc, char **argv)
 {
     bool a = false;
     bool l = false;
-    bool al= false;
-    bool flags = false;
     bool R = false;
     string dot = ".";
     vector< char* > filenames;
 
     for(int i = 1; i < argc; i++)
     {
-        if(argv[i][1] == 'a')
+        if(strcmp(argv[i], "-a") == 0)
         {
-            flags = true;
-            if(argv[i][2] == 'l')
-            {
-                 al = true;
-                 l = true;
-            }
-            a = true;
+            a = true;        
         }
-        else if(argv[i][1] == 'l')
+        else if(strcmp(argv[i], "-l") == 0)
         {
             l = true;
-            flags = true;
-            if(argv[i][2] == 'a')
-            {
-                al = true;
-            }
         }
-        else if(argv[i][1] == 'R')
+        else if(strcmp(argv[i], "-R") == 0)
         {
-            flags = true;
             R = true;
+        }
+        else if((strcmp(argv[i], "-la") == 0) || (strcmp(argv[i], "-al") == 0))
+        {
+            a = true;
+            l = true;
+        }
+        else if((strcmp(argv[i], "-aR") == 0) || (strcmp(argv[i], "-Ra") == 0))
+        {
+            a = true;
+            R= true;
+        } 
+        else if((strcmp(argv[i], "-lR") == 0) || (strcmp(argv[i], "-Rl") == 0))
+        {
+            l = true;
+            R =  true;
+        }
+        else if((strcmp(argv[i], "-alR") == 0) || (strcmp(argv[i], "-aRl") == 0))
+        {
+            a = true;
+            l = true;
+            R = true;
+        }
+        else  if((strcmp(argv[i], "-laR") == 0) || (strcmp(argv[i], "-lRa") == 0))
+        {
+            l = true;
+            a = true;
+            R = true;
+        }
+        else if((strcmp(argv[i], "-Ral") == 0) || (strcmp(argv[i], "-Rla") == 0))
+        {
+            R = true;
+            l = true;
+            a = true;
         }
         else
         {
             filenames.push_back(argv[i]);
         }
-
     }
 
-    if(a && l)
+
+    int filesize = filenames.size();
+    if(!a && !l && !R)
     {
-        al = true;
+        if(filesize > 1)
+        {
+            for(int i = 0; i < filesize; ++i)
+            {
+                cout << filenames[i] << ":" << endl;
+                noFlags(filenames[i]);
+                cout << endl;
+            }
+        }
+        else
+        {
+            noFlags(dot.c_str());
+        }
     }
-    //cout << filenames.at(0);
-    if(!filenames.empty() && !flags)
+
+    if( l && !a && !R)
     {
-       // cout << "in no flag" << endl;
-       for(unsigned int i= 0; i < filenames.size(); i++)
-       {
-           noFlags(filenames.at(i));
-       }
+         if(filesize > 1)
+        {
+            for(int i = 0; i < filesize; ++i)
+            {
+                cout << filenames[i] << ":" << endl;
+                lFlag(filenames[i], false);
+                cout << endl;
+            }
+        }
+        else
+        {
+            lFlag(dot.c_str(), false);
+        }
     }
-    if(argc == 1)
+
+    if( R && !a && !l)
     {
-        noFlags(dot.c_str());
+         if(filesize > 1)
+        {
+            for(int i = 0; i < filesize; ++i)
+            {
+                cout << filenames[i] << ":" << endl;
+                Rflag(filenames[i]);
+                cout << endl;
+            }
+        }
+        else
+        {
+            Rflag(dot.c_str());
+        }
     }
-    if(a && !l && !al)
+    /*
+    if( a && !l && !R)
     {
-        if(filenames.empty())
+        if(filesize > 1)
+        {
+            for(int i = 0; i < filesize; ++i)
+            {
+                cout << filenames[i] << ":" << endl;
+                aFlag(filenames[i]);
+                cout << endl;
+            }
+        }
+        else
         {
             aFlag(dot.c_str());
         }
-        for(unsigned int i = 0; i < filenames.size(); ++i)
-        {
-           if(filenames.size() > 1) cout << filenames.at(i) << ":" << endl;
-            aFlag(filenames[i]);
-        }
     }
-    if(l)
-    {  
-       // cout << "in l" << endl;
-        if(filenames.empty())
-        {
-            lFlag(dot.c_str(), al);
-        }
-        for(unsigned int i = 0; i < filenames.size(); ++i)
-        {
-           if(filenames.size() > 1) cout << filenames.at(i) << ":" << endl;
-         //  cout << filenames.at(i) << endl;
-           lFlag(filenames.at(i), al);
-        }
-
-    }
-    if(R)
+    if(a && l && !R)
     {
-         if(filenames.empty())
+        if(filesize > 1)
         {
-            Rflag(dot.c_str(),' ' , ' ');
+            for(int i = 0; i < filesize; ++i)
+            {
+                cout << filenames[i] << ":" << endl;
+                lFlag(filenames[i], true);
+                cout << endl;
+            }
         }
-        for(unsigned int i = 0; i < filenames.size(); ++i)
+        else
         {
-           if(filenames.size() > 1) cout << filenames.at(i) << ":" << endl;
-         //  cout << filenames.at(i) << endl;
-           Rflag(filenames.at(i), ' ', ' ');
+            lFlag(dot.c_str(), true);
         }
-
     }
+
+    if(a && R && !l)
+    {
+        if(filesize > 1)
+        {
+            for(int i = 0; i < filesize; ++i)
+            {
+                cout << filenames[i] << ":" << endl;
+                Rflag(filenames[i], true, false);
+                cout << endl;
+            }
+        }
+        else
+        {
+            Rflag(dot.c_str(), true, false);
+        }
+    }
+    if(R && l && !a)
+    {
+         if(filesize > 1)
+        {
+            for(int i = 0; i < filesize; ++i)
+            {
+                cout << filenames[i] << ":" << endl;
+                Rflag(filenames[i], false, true);
+                cout << endl;
+            }
+        }
+        else
+        {
+            Rflag(dot.c_str(), false, true);
+        }
+    }
+    if( a && R && l)
+    {
+        if(filesize > 1)
+        {
+            for(int i = 0; i < filesize; ++i)
+            {
+                cout << filenames[i] << ":" << endl;
+                Rflag(filenames[i], true, true);
+                cout << endl;
+            }
+        }
+        else
+        {
+            Rflag(dot.c_str(), true, true);
+        }
+    }*/
     return 0;
 }
