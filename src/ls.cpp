@@ -330,65 +330,59 @@ void Rflag(const char *filename)
     vector<char*> dirs;
     DIR *dir;
     dirent *entry;
-   if((dir = opendir(filename)) == NULL)
-   {
-       perror("open dir");
-       return;
-   }
-   
-   cout << filename << ":" << endl;
-
-   while((entry = readdir(dir)))
-   {
-        struct stat s;
-
-        char filepath[1024];
-        string dash = "/";
-        strcpy(filepath, filename);
-        strcat(filepath, dash.c_str());
+     struct stat s;
+    if((dir = opendir(filename)) == NULL)
+    {
+		perror("Open Dir");
+	}
+	cout << filename << ":" << endl;
+	while((entry = readdir(dir)))
+	{
+		char filepath[1024];
+		strcpy(filepath, filename);
+        string slash = "/";
+        strcat(filepath, slash.c_str());
         strcat(filepath, entry->d_name);
+        
         if((stat(filepath, &s)) == -1)
         {
-            perror("Stat Error");
-            return;
-        }
-
-        cout << entry->d_name << endl;
-        if(entry->d_name[0] == '0')
-        {
-            continue;
-        }
-        if(S_ISDIR(s.st_mode))
-        {
-            dirs.push_back(entry->d_name);
-        }
-   }
-   if(errno != 0)
-   {
-       perror("Reading Dir");
-       return;
-   }
-
-   cout << endl;
-   cout << endl;
-
-   for(size_t i = 0; i < dirs.size(); i++)
-   {
-       char dir[1024];
-       string dash = "/";
-       strcpy(dir, filename);
-       strcat(dir, dash.c_str());
-       strcat(dir, dirs.at(i));
-       Rflag(dir);
-   }
-
-   if((closedir(dir)) == -1)
-   {
-       perror("Closing dir");
-   }
-   
-   return;
-
+			perror("Stat Error");
+		}
+		if( entry->d_name[0] == '.')
+		{
+			continue;
+		}
+		
+		cout << entry->d_name << endl;
+		
+		if(S_ISDIR(s.st_mode))
+		{
+			dirs.push_back(entry->d_name);
+		}
+		cout << endl;
+	}
+	if(errno != 0)
+	{
+		perror("reading Dir");
+	}
+	
+	int vecsize = dirs.size();
+	
+	for(int i = 0; i < vecsize; ++i)
+	{
+		char filepath[1024];
+		strcpy(filepath, filename);
+        string slash = "/";
+        strcat(filepath, slash.c_str());
+        strcat(filepath, dirs[i]);
+        Rflag(filepath);
+	}
+	if((closedir(dir) == -1))
+	{
+		perror("Closing Dir");
+	}
+	
+	return;
 }
 
 
