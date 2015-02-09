@@ -1,0 +1,706 @@
+Script started on Sun 08 Feb 2015 09:55:16 PM PST
+~
+vgarc018@hammer $ cd [K[K1[Ks100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m clear
+[H[2J[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd CS100
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m cd ls/rshell/
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m make
+g++ -Wall -Werror -ansi -pedantic ./src/rshell.cpp -o ./bin/rshell
+g++ -Wall -Werror -ansi -pedantic ./src/ls.cpp -o ./bin/ls
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin.[K/ls #testing with no par ameters
+LICENSE Makefile README.md [34msrc[0m  [34mtest[0m  [34mbin[0m  ls 
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls  [K[K[K[K[K[K[K[K#tests for one flag
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a
+[34m.[0m  [34m..[0m  [34m.git[0m  LICENSE Makefile README.md [34msrc[0m  [34mtest[0m  [34mbin[0m  ls 
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -l
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m ls [K[K[Kbin/ls -l[KR
+.:
+LICENSE 
+Makefile 
+README.md 
+[34msrc[0m  
+[34mtest[0m  
+[34mbin[0m  
+ls 
+
+./src:
+rshell.cpp 
+ls.cpp 
+[32mls[0m  
+
+./test:
+exec.script 
+
+./bin:
+[32mrshell[0m  
+[32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #tests with 3[K2 flags
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #tests with 2 flags[10Pbin/ls -R [K[Ka -l
+-rwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m.[0m  
+-rwx------ 4 vgarc018 csmajs   4096 Feb 05  11:56 [34m..[0m  
+-rwx------ 8 vgarc018 csmajs   4096 Feb 08  08:55 [34m.git[0m  
+drw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+drw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+drw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+-rwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+drw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a -l[KR[K[K[K[Kl -R
+.:
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+
+./src:
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+./test:
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+./bin:
+-rwx------ 1 vgarc018 csmajs  73070 Feb 08  09:52 [32mrshell[0m  
+-rwx------ 1 vgarc018 csmajs  38978 Feb 08  09:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -l -R[K[K[K -l[K[K[K[Ka -R
+.:
+[34m.[0m  
+[34m..[0m  
+[34m.git[0m  
+LICENSE 
+Makefile 
+README.md 
+[34msrc[0m  
+[34mtest[0m  
+[34mbin[0m  
+ls 
+
+./src:
+rshell.cpp 
+ls.cpp 
+[32mls[0m  
+
+./test:
+exec.script 
+
+./bin:
+[32mrshell[0m  
+[32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a -R[K[K[K[KR -l [K[Ka #same flags di fferenc eor[K[K[Korder[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci fferent order
+.:
+[34m.[0m  
+[34m..[0m  
+[34m.git[0m  
+LICENSE 
+Makefile 
+README.md 
+[34msrc[0m  
+[34mtest[0m  
+[34mbin[0m  
+ls 
+
+./src:
+rshell.cpp 
+ls.cpp 
+[32mls[0m  
+
+./test:
+exec.script 
+
+./bin:
+[32mrshell[0m  
+[32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -R -a #same flags diffferent order[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C #same flags diff[1P[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[C[C[C[Cl #same flags dif[4hf[4l[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[C[C[C[C[C
+
+.:
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+
+./src:
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+./test:
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+./bin:
+-rwx------ 1 vgarc018 csmajs  73070 Feb 08  09:52 [32mrshell[0m  
+-rwx------ 1 vgarc018 csmajs  38978 Feb 08  09:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -R -l #same flags diffferent order[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[C[C[C[Ca
+[C[C[C[C[C[C[C[C[C[C[C[C[C[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[Ca -R[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K#tests for all 3 flags
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #tests for all 3 flagsbin/ls -R -l #same flags diffferent order[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[C[C[C[Ca
+[C[C[C[C[C[C[C[C[C[C[C[C[C[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[Ca -R[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C -L[Kl
+.:
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m.[0m  
+drwx------ 4 vgarc018 csmajs   4096 Feb 05  11:56 [34m..[0m  
+drwx------ 8 vgarc018 csmajs   4096 Feb 08  08:55 [34m.git[0m  
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+
+./src:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+./test:
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+./bin:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rwx------ 1 vgarc018 csmajs  73070 Feb 08  09:52 [32mrshell[0m  
+-rwx------ 1 vgarc018 csmajs  38978 Feb 08  09:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a -R -l[K[K[K[K[K[K[Klar[KR
+.:
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m.[0m  
+drwx------ 4 vgarc018 csmajs   4096 Feb 05  11:56 [34m..[0m  
+drwx------ 8 vgarc018 csmajs   4096 Feb 08  08:55 [34m.git[0m  
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+
+./src:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+./test:
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+./bin:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rwx------ 1 vgarc018 csmajs  73070 Feb 08  09:52 [32mrshell[0m  
+-rwx------ 1 vgarc018 csmajs  38978 Feb 08  09:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -laR[K[K[K[K[K[K[K[K[K[K[K#tests for the flags connec ted 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #tests for the flags connectted [A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [16Pbin/ls -laR
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+-rwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m.[0m  
+-rwx------ 4 vgarc018 csmajs   4096 Feb 05  11:56 [34m..[0m  
+-rwx------ 8 vgarc018 csmajs   4096 Feb 08  08:55 [34m.git[0m  
+drw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+drw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+drw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+-rwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+drw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -la[K[Kls[Ka
+-rwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m.[0m  
+-rwx------ 4 vgarc018 csmajs   4096 Feb 05  11:56 [34m..[0m  
+-rwx------ 8 vgarc018 csmajs   4096 Feb 08  08:55 [34m.git[0m  
+drw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+drw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+drw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+-rwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+drw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -la[K[Kal[K[KaR
+.:
+[34m.[0m  
+[34m..[0m  
+[34m.git[0m  
+LICENSE 
+Makefile 
+README.md 
+[34msrc[0m  
+[34mtest[0m  
+[34mbin[0m  
+ls 
+
+./src:
+rshell.cpp 
+ls.cpp 
+[32mls[0m  
+
+./test:
+exec.script 
+
+./bin:
+[32mrshell[0m  
+[32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -aR[K[KRa
+.:
+[34m.[0m  
+[34m..[0m  
+[34m.git[0m  
+LICENSE 
+Makefile 
+README.md 
+[34msrc[0m  
+[34mtest[0m  
+[34mbin[0m  
+ls 
+
+./src:
+rshell.cpp 
+ls.cpp 
+[32mls[0m  
+
+./test:
+exec.script 
+
+./bin:
+[32mrshell[0m  
+[32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -Ra[K[KlR
+.:
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+
+./src:
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+./test:
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+./bin:
+-rwx------ 1 vgarc018 csmajs  73070 Feb 08  09:52 [32mrshell[0m  
+-rwx------ 1 vgarc018 csmajs  38978 Feb 08  09:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -lR[K[KL[KRl
+.:
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+
+./src:
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+./test:
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+./bin:
+-rwx------ 1 vgarc018 csmajs  73070 Feb 08  09:52 [32mrshell[0m  
+-rwx------ 1 vgarc018 csmajs  38978 Feb 08  09:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m tes[K[K[K#testing for all three flag s connected
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m -[K#testing for all three flagss connected[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [17Pbin/ls -Rl
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ca
+.:
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m.[0m  
+drwx------ 4 vgarc018 csmajs   4096 Feb 05  11:56 [34m..[0m  
+drwx------ 8 vgarc018 csmajs   4096 Feb 08  08:55 [34m.git[0m  
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+
+./src:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+./test:
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+./bin:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rwx------ 1 vgarc018 csmajs  73070 Feb 08  09:52 [32mrshell[0m  
+-rwx------ 1 vgarc018 csmajs  38978 Feb 08  09:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -Rla[K[K[KaRl
+.:
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m.[0m  
+drwx------ 4 vgarc018 csmajs   4096 Feb 05  11:56 [34m..[0m  
+drwx------ 8 vgarc018 csmajs   4096 Feb 08  08:55 [34m.git[0m  
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+
+./src:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+./test:
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+./bin:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rwx------ 1 vgarc018 csmajs  73070 Feb 08  09:52 [32mrshell[0m  
+-rwx------ 1 vgarc018 csmajs  38978 Feb 08  09:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -aRl[K[KlR
+.:
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m.[0m  
+drwx------ 4 vgarc018 csmajs   4096 Feb 05  11:56 [34m..[0m  
+drwx------ 8 vgarc018 csmajs   4096 Feb 08  08:55 [34m.git[0m  
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+
+./src:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+./test:
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+./bin:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rwx------ 1 vgarc018 csmajs  73070 Feb 08  09:52 [32mrshell[0m  
+-rwx------ 1 vgarc018 csmajs  38978 Feb 08  09:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #testing for the permission s of a file REaD[K[KADME.md
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m ls -[K[K[K[K#testing for the permissionss of a file README.md[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [16Pbin/ls -alR
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[Kl
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -l[Kchmod u+x README.md 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m ls -l
+total 40
+drwx------ 2 vgarc018 csmajs  4096 Feb  8 21:52 bin
+-rw------- 1 vgarc018 csmajs 18027 Feb  3 16:54 LICENSE
+-rw------- 1 vgarc018 csmajs     0 Feb  8 21:51 ls
+-rw------- 1 vgarc018 csmajs   222 Feb  8 21:05 Makefile
+-rwx------ 1 vgarc018 csmajs   583 Feb  3 16:54 README.md
+drwx------ 2 vgarc018 csmajs  4096 Feb  8 21:45 src
+drwx------ 2 vgarc018 csmajs  4096 Feb  3 16:54 test
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m ls -lchmod u+x README.md [11Pbin/ls -l
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rwx------ 1 vgarc018 csmajs    583 Feb 03  04:54 [32mREADME.md[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #is is [K[K[K[K[Kt is not [K[Kw green an executa be[Kle
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #it is now green an executabble[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [18Pbin/ls -l
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4P[C[C[C[C[Cchmod u+x README.md [1P[4h-[4l
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m chmod u-x README.md #it is now green an executabble[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [18Pbin/ls -l
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4P[C[C[C[C[C[4hbin/[4l[C[C[C[C[C
+-rw------- 1 vgarc018 csmajs  18027 Feb 03  04:54 LICENSE 
+-rw------- 1 vgarc018 csmajs    222 Feb 08  09:05 Makefile 
+-rw------- 1 vgarc018 csmajs    583 Feb 03  04:54 README.md 
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34msrc[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34mtest[0m  
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:52 [34mbin[0m  
+-rw------- 1 vgarc018 csmajs      0 Feb 08  09:51    ls 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #testing into directory
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #testing into directory[14Pbin/ls -l[K[K
+LICENSE Makefile README.md [34msrc[0m  [34mtest[0m  [34mbin[0m  ls 
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls src/
+rshell.cpp ls.cpp [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls src/[K[K[K[Ktest/
+exec.script 
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls test/[K[K[K[K[Kbin/
+[32mrshell[0m  [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls bin/[K[K[K[K-aRL [K[Kl -[Ksrc/
+src/:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -aRl src/[K[K[K[K[K[K[K[K[Kbin/test/[1Psrc/ -a -l
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+-rwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+drw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+drw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+drwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m clear
+[H[2J[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m clearbin/ls src/ -a -l[Ksrc/ -a -l[K[K[Kl
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+-rwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+drw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+drw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+drwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls src/ -al[KR
+src/:
+[34m.[0m  
+[34m..[0m  
+rshell.cpp 
+ls.cpp 
+[32mls[0m  
+
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls src/ -aR[K[KRl
+src/:
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls src/ -Rl[K[K[K[K-src/lsrc/Rsrc/ src/
+src/:
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #testing flags with 2 direc tories
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #testing flags with 2 directtories[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [12Pbin/ls -lR src/
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C r[Ktest/
+src/:
+src/:
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+test/:
+test/:
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -lR src/ test/[1P
+src/:
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+test/:
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -l src/ test/[C[1P[4ha[4l
+src/:
+[34m.[0m  [34m..[0m  rshell.cpp ls.cpp [32mls[0m  
+
+test/:
+[34m.[0m  [34m..[0m  exec.script 
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ test/[4hl[4l
+src/:
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+-rwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+drw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+drw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+drwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+test/:
+-rwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+-rwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+drw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -al src/ test/[1P[1P[1P[C[C[C[C[C[C[C[C[C[C[C ls[K[K-aRl
+src/:
+src/:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+test/:
+test/:
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls  src/ test/ -aRl[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kbin/ls -al src/ test/[4hR[4l
+src/:
+src/:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+test/:
+test/:
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -alR src/ test/[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K#testing on directories and  files
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m #testing on directories and  files[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [5Pbin/ls -alR src/ test/
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C READMME.md 
+src/:
+src/:
+drwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+-rw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+-rwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+test/:
+test/:
+drwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+drwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+-rw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+README.md:
+Open Dir: Not a directory
+README.md:
+Segmentation fault
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -alR src/ test/ READMME.md [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C src/ test/ README[1P[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[C[C[C
+
+src/:
+-rwx------ 2 vgarc018 csmajs   4096 Feb 08  09:45 [34m.[0m  
+-rwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+drw------- 1 vgarc018 csmajs   5116 Feb 05  10:29 rshell.cpp 
+drw------- 1 vgarc018 csmajs  20376 Feb 08  09:45 ls.cpp 
+drwx------ 1 vgarc018 csmajs  92602 Feb 08  08:52 [32mls[0m  
+
+test/:
+-rwx------ 2 vgarc018 csmajs   4096 Feb 03  04:54 [34m.[0m  
+-rwx------ 6 vgarc018 csmajs   4096 Feb 08  09:51 [34m..[0m  
+drw------- 1 vgarc018 csmajs  17878 Feb 03  04:54 exec.script 
+
+README.md:
+-rw------- 1 vgarc018 csmajs  583 Feb 03  04:54 README.md 
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -al src/ test/ READMEE.md [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C src/ test/ README.[1P[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[C[C
+
+src/:
+[34m.[0m  [34m..[0m  rshell.cpp ls.cpp [32mls[0m  
+
+test/:
+[34m.[0m  [34m..[0m  exec.script 
+
+README.md:
+README.md [s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ test/ README..md [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/ README.m[1P[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl/ README.[4hm[4l[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+src/:
+[34m.[0m  [34m..[0m  rshell.cpp ls.cpp [32mls[0m  
+
+tesl/:
+Stat error: No such file or directory
+open directory: No such file or directory
+README.md:
+README.md [s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README..md [K[A[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md 
+src/:
+[34m.[0m  [34m..[0m  rshell.cpp ls.cpp [32mls[0m  
+
+tesl/:
+Stat error: No such file or directory
+open directory: No such file or directory
+README.md:
+README.md [s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ tesl/ README.md [K[K[K[K[K[K[K[K[K[K[K[K[Kt/ README.md 
+src/:
+[34m.[0m  [34m..[0m  rshell.cpp ls.cpp [32mls[0m  
+
+test/:
+[34m.[0m  [34m..[0m  exec.script 
+
+README.md:
+README.md [s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a src/ test/ README.md [C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[KMakefile 
+Makefile [s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a  Makefile [K[K[K[K[K[K[K[K[KRe[K[KRw[Ke[KEADME.md 
+README.md [s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -a  README.md [1P[4hl[4l
+-rw------- 1 vgarc018 csmajs  583 Feb 03  04:54 README.md [s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m bin/ls -l  README.md [1P[4hR[4l
+Open Dir: Not a directory
+README.md:
+Segmentation fault
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m clear
+[H[2J[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/ls/rshell[0;95m (ls) [0;36m$[0m exit
+exit
+~
+vgarc018@hammer $ exit
+exit
+
+Script done on Sun 08 Feb 2015 10:13:14 PM PST
