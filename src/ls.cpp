@@ -16,13 +16,54 @@
 using namespace std;
 
 
-void colorOut(
+void colorOut(const char *filepath, const char *file)
+{
+    string black = "\033[30m";
+    string red =  "\033[31m";
+    string green = "\033[32m";
+    string yellow = "\033[33m";
+    string blue ="\033[34m";
+    string gray   = "\033[47m";
+    string teal = "\033[36m";
+    string white = "\033[37m";
+    string reset = "\033[0m ";
+    
+    struct stat s;
+    if((stat(filepath, &s) == -1))
+    {
+        perror("Error in Stat");
+    }
+    if(s.st_mode & S_IFDIR)
+    {
+        cout << blue << file << reset << " ";
+    }
+    else if(s.st_mode & S_IXUSR)
+    {
+        cout << green << file << reset << " ";
+    }
+    else if(file[0] == '.' && (s.st_mode & S_IFDIR))
+    {
+        cout << blue << file << reset << " ";
+    }
+    else if(file[0] == '.' && (s.st_mode & S_IXUSR))
+    {
+        cout << green << file << reset << " ";
+    }
+    else if(file[0] == '.')
+    {
+        cout << gray << file << reset << " ";
+    }
+    else
+    {
+        cout << file << " ";
+    }
+}
 
 void notDir(const char *file, char flag)
 {
     struct stat s;
    //:wq cout << "in not dir" << endl;
-   cout << file << endl;
+  // cout << file << endl;
     if((stat(file, &s)) != 0)
     {
         perror("Stat Error");
@@ -70,12 +111,11 @@ void notDir(const char *file, char flag)
              strftime(buf,80,  "%b %d  %I:%M ", timeinfo);
              printf("%s",buf);
              cout << setw(5);
-             cout << file << endl;
-
+             colorOut(file, file);
         }   
         else
         {
-            cout << file << endl;
+            colorOut(file, file);
         }
     }
 }
@@ -124,8 +164,14 @@ void aFlag(const char *file)
     {
         while((entry = readdir(dir)))
         {
-
-                cout << entry->d_name << endl;
+        	char filepath[1024];
+		    strcpy(filepath, file);
+            string slash = "/";
+            strcat(filepath, slash.c_str());
+            strcat(filepath, entry->d_name);
+ 
+            colorOut(filepath,entry->d_name);
+            //cout << endl;
         }
         if(errno != 0)
         {
@@ -134,6 +180,8 @@ void aFlag(const char *file)
         }
 
     }
+    cout << endl;
+    cout << endl;
    	if(closedir(dir) == -1)
 	{
 		perror("closing dir");
@@ -164,7 +212,14 @@ void noFlags(const char *file)
         {
            if(entry->d_name[0] != '.')
            {
-                cout << entry->d_name << endl;
+        	    char filepath[1024];
+		        strcpy(filepath, file);
+                string slash = "/";
+                strcat(filepath, slash.c_str());
+                strcat(filepath, entry->d_name);
+        
+               colorOut(filepath, entry->d_name);
+               // cout << entry->d_name << endl;
            }
         }
         if(errno != 0)
@@ -173,6 +228,8 @@ void noFlags(const char *file)
             return;
         }
     }
+    cout << endl;
+    cout << endl;
    	if(closedir(dir) == -1)
 	{
 		perror("closing dir");
@@ -253,9 +310,8 @@ void lFlag(const char *filename, bool flag)
 						    strftime(buf,80,  "%b %d  %I:%M ", timeinfo);
 						    printf("%s",buf);
 						    cout << setw(5);
-						    cout << entry->d_name  << endl;
-                  
-
+                            colorOut(filepath, entry->d_name);
+						    cout << endl;
                     }
                 }
                 else
@@ -308,7 +364,8 @@ void lFlag(const char *filename, bool flag)
 								strftime(buf,80,  "%b %d  %I:%M ", timeinfo);
 								printf("%s",buf);
 								cout << setw(5);
-								cout << entry->d_name  << endl;
+								colorOut(filepath, entry->d_name);
+                                cout <<  endl;
 							}	
 					}
 			}
@@ -354,7 +411,8 @@ void Rflag(const char *filename)
 			continue;
 		}
 		
-		cout << entry->d_name << endl;
+		colorOut(filepath, entry->d_name);
+        cout << endl;
 		
 		if(S_ISDIR(s.st_mode))
 		{
@@ -408,9 +466,10 @@ void aRflag(const char *filename)
         {
 			perror("Stat Error");
 		}
-        cout << entry->d_name << endl;
+       	colorOut(filepath, entry->d_name);
+        cout << endl;
 		
-		if( entry->d_name[0] == '.' && entry->d_name[1] == '.')
+		if( entry->d_name[0] == '.' ||  entry->d_name[1] == '.')
 		{
 			continue;
 		}
@@ -512,7 +571,8 @@ void alRflag(const char *filename)
 				strftime(buf,80,  "%b %d  %I:%M ", timeinfo);
 				printf("%s",buf);
 				cout << setw(5);
-				cout << entry->d_name  << endl;
+                colorOut(filepath, entry->d_name);
+				cout << endl;
 			}	
 		if(entry->d_name[0] == '.' || entry->d_name[1] == '.')
 		{
@@ -625,7 +685,8 @@ void lRflag(const char *filename)
 				strftime(buf,80,  "%b %d  %I:%M ", timeinfo);
 				printf("%s",buf);
 				cout << setw(5);
-				cout << entry->d_name  << endl;
+                colorOut(filepath, entry->d_name);
+				cout <<  endl;
 			}
 		
 		if(S_ISDIR(s.st_mode))
