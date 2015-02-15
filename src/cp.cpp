@@ -8,8 +8,8 @@
 #include <fstream>
 #include <stdio.h>
 #include <fcntl.h>
-#include <Timer.h>
-
+#include "Timer.h"
+#include <string.h>
 
 using namespace std;
 
@@ -140,30 +140,40 @@ int main(int argc, char** argv)
 
     Timer t;
     double etime;
+    double wallTime;
+    double sysTime;
 
-
-    if(argc == 3)
+    if(argc == 4)
     {
+        const char *temp0 = strcat(argv[2], "_0");
        t.start();
-       instream(argv[1], argv[2]);  
+       instream(argv[1], temp0);  
        t.elapsedUserTime(etime);
-       cout << "time for put and get: " << etime << endl;
+       t.elapsedWallclockTime(wallTime);
+       t.elapsedSystemTime(sysTime);
+       cout << "time for put and get: " << etime << "  " << wallTime <<"  " <<  sysTime << endl;
 
+       const char *temp1 =  strcat(argv[2], "_1");
        t.start();
-       readclose_buf(argv[1], argv[2]);
+       t.start();
+       readclose_buf(argv[1], temp1);
        t.elapsedUserTime(etime);
-       cout << "time for the read and write buffer: " << etime << endl;
-
-       t.start()
-       readclose(argv[1], argv[2]);
+       t.elapsedWallclockTime(wallTime);
+       t.elapsedSystemTime(sysTime);
+       cout << "time for the read and write buffer: " << etime << "  " << wallTime <<  "  " << sysTime << endl;
+      const char *temp2 = strcat(argv[2], "_2");
+       t.start();
+       readclose(argv[1], temp2);
        t.elapsedUserTime(etime);
-       cout << "Time for the read and write char: " << etime << endl;
+       t.elapsedWallclockTime(wallTime);
+       t.elapsedSystemTime(sysTime);
+       cout << "Time for the read and write char: " << etime << "   " << wallTime << "   " << sysTime << endl;
 
     }
     
-    if(argc == 4)
+    if(argc == 3)
     {
-
+       readclose_buf(argv[1], argv[2]);
     }
     return 0;
 }
