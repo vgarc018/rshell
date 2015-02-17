@@ -72,8 +72,8 @@ void parsing(string & x)
     {
         size_t q, a,o;
         q = lines[i].find(";");
-        a = lines[i].find("&");
-        o = lines[i].find("|");
+        a = lines[i].find("&&");
+        o = lines[i].find("||");
         if(lines[i] == ";" || (q < o && q < a ) )
         {
             connectors.push(";");
