@@ -198,6 +198,11 @@ void parsing(string & x)
 
 }
 
+void piping(string &s)
+{
+
+}
+
 int main(int argc, char** argv)
 {
     string line;
@@ -214,7 +219,7 @@ int main(int argc, char** argv)
       char host[200];
       if( gethostname(host, 200) == -1)
           perror("Hostname");
-
+        
         cout << dir << endl;
         if(login)
         {
@@ -224,7 +229,11 @@ int main(int argc, char** argv)
         {
             cout << "$ ";
         }
-
+        bool pipe;
+        bool inredir;
+        bool outone;
+        bool outtwo;
+        bool noinoutpipe;
         getline(cin,line);
         size_t comment = line.find("#");
         if(comment != string::npos)
@@ -236,7 +245,10 @@ int main(int argc, char** argv)
             cout << "Thanks for using Rshell" << endl;
             exit(0);
         }
-        parsing(line);
+        if(!noinoutpipe)
+        {
+            parsing(line);
+        }
    }
     return 0;
 }
