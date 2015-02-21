@@ -236,11 +236,16 @@ void input()
     {
         perror("Error Opening");
     }
+    int savedIn = dup(STDIN_FILENO);
     dup2(in, STDIN_FILENO);
     close(in);
     char *cmds[1];
+    cmds[0] = new char[cmd.size()+1];
     strcpy(cmds[0], cmd.c_str());
     cexec(cmds);
+    //delete [] cmds;
+    dup2(savedIn,STDIN_FILENO);
+    close(savedIn);
 }
 
 int main(int argc, char** argv)
