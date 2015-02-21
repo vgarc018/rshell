@@ -16,10 +16,18 @@
 #include <istream>
 #include <queue>
 #include <cstdio>
-
+#include <string.h>
+#include <fcntl.h>
 
 using namespace std;
 using namespace boost;
+
+bool pipe1 = false;
+bool inredir = false;
+bool outone = false;
+bool outtwo = false;
+bool noinoutpipe = false;
+vector<string> p;
 
 int cexec(char** cmds)
 {
@@ -198,9 +206,41 @@ void parsing(string & x)
 
 }
 
-void piping(string &s)
+template <typename T>
+void print(vector<T> &q)
 {
+    for(unsigned int i = 0; i < q.size(); i++)
+    {
+        cout << "q[i] = " << q[i] << endl; 
+    }
+}
 
+void parsing_in(string s)
+{
+   typedef tokenizer<char_separator<char> > mytok;
+    char_separator <char> space (" < ");
+    mytok tokens1 (s, space);
+    for(mytok::iterator i = tokens1.begin(); i != tokens1.end(); ++i)
+    {
+        p.push_back(*i);
+    }
+}
+
+void input()
+{
+    print(p);
+    string cmd = p.at(0);
+    string file = p.at(1);
+    int in;
+    if((in = open(file.c_str(), O_RDONLY)) == -1)
+    {
+        perror("Error Opening");
+    }
+    dup2(in, STDIN_FILENO);
+    close(in);
+    char *cmds[1];
+    strcpy(cmds[0], cmd.c_str());
+    cexec(cmds);
 }
 
 int main(int argc, char** argv)
@@ -229,11 +269,11 @@ int main(int argc, char** argv)
         {
             cout << "$ ";
         }
-        bool pipe;
-        bool inredir;
-        bool outone;
-        bool outtwo;
-        bool noinoutpipe;
+       // bool pipe = false;
+       // bool inredir = false;
+       // bool outone = false;
+       // bool outtwo = false;
+        bool noinoutpipe = false;
         getline(cin,line);
         size_t comment = line.find("#");
         if(comment != string::npos)
@@ -245,7 +285,14 @@ int main(int argc, char** argv)
             cout << "Thanks for using Rshell" << endl;
             exit(0);
         }
-        if(!noinoutpipe)
+        size_t in = line.find("<");
+        if(in != string::npos)
+        {
+            noinoutpipe = false;
+            parsing_in(line);
+            input(); 
+        }
+        if(noinoutpipe)
         {
             parsing(line);
         }
