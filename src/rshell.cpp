@@ -228,7 +228,6 @@ void parsing_in(string s)
 
 void input()
 {
-    print(p);
     string cmd = p.at(0);
     string file = p.at(1);
     int in;
@@ -237,15 +236,122 @@ void input()
         perror("Error Opening");
     }
     int savedIn = dup(STDIN_FILENO);
-    dup2(in, STDIN_FILENO);
-    close(in);
+    if(dup2(in, STDIN_FILENO) == -1)
+    {
+        perror("Error in Dup");
+    }
+    if(close(in) == -1)
+    {
+        perror("closing fd");
+    }
     char *cmds[1];
     cmds[0] = new char[cmd.size()+1];
     strcpy(cmds[0], cmd.c_str());
     cexec(cmds);
     //delete [] cmds;
-    dup2(savedIn,STDIN_FILENO);
-    close(savedIn);
+    if(dup2(savedIn,STDIN_FILENO) == -1)
+    {
+        perror("error in dup");
+    }
+    if(close(savedIn) == -1)
+    {
+        perror("Error in close");
+    }
+}
+
+void parsing_out(string s)
+{
+   typedef tokenizer<char_separator<char> > mytok;
+    char_separator <char> space (" > ");
+    mytok tokens1 (s, space);
+    for(mytok::iterator i = tokens1.begin(); i != tokens1.end(); ++i)
+    {
+        p.push_back(*i);
+    }
+}
+
+void output()
+{
+    string cmd = p.at(0);
+    string file = p.at(1);
+    int in;
+    if((in = open(file.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0666)) == -1)
+    {
+        perror("Error Opening");
+        return;
+    }
+    int savedOut = dup(STDOUT_FILENO);
+    if(dup2(in, STDOUT_FILENO) == -1)
+    {
+        perror("Error in Dup");
+        return;
+    }
+    if(close(in) == -1)
+    {
+        perror("closing fd");
+    }
+    char *cmds[2];
+    cmds[0] = new char[cmd.size()+1];
+    strcpy(cmds[0], cmd.c_str());
+    cmds[1] = NULL;
+    cexec(cmds);
+    //delete [] cmds;
+    if(dup2(savedOut,STDOUT_FILENO) == -1)
+    {
+        perror("error in dup");
+    }
+    if(close(savedOut) == -1)
+    {
+        perror("Error in close");
+    }
+}
+
+
+void parsing_out_two(string s)
+{
+   typedef tokenizer<char_separator<char> > mytok;
+    char_separator <char> space (" >> ");
+    mytok tokens1 (s, space);
+    for(mytok::iterator i = tokens1.begin(); i != tokens1.end(); ++i)
+    {
+        p.push_back(*i);
+    }
+}
+
+void output_two()
+{
+    string cmd = p.at(0);
+    string file = p.at(1);
+    int in;
+    if((in = open(file.c_str(), O_WRONLY | O_CREAT | O_APPEND, 0666)) == -1)
+    {
+        perror("Error Opening");
+        return;
+    }
+    int savedOut = dup(STDOUT_FILENO);
+    if(dup2(in, STDOUT_FILENO) == -1)
+    {
+        perror("Error in Dup");
+        return;
+    }
+    if(close(in) == -1)
+    {
+        perror("closing fd");
+    }
+    char *cmds[2];
+    cmds[0] = new char[cmd.size()+1];
+    strcpy(cmds[0], cmd.c_str());
+    cmds[1] = NULL;
+    cexec(cmds);
+    //delete [] cmds;
+    if(dup2(savedOut,STDOUT_FILENO) == -1)
+    {
+        perror("error in dup");
+    }
+    if(close(savedOut) == -1)
+    {
+        perror("Error in close");
+    }
 }
 
 int main(int argc, char** argv)
@@ -274,11 +380,7 @@ int main(int argc, char** argv)
         {
             cout << "$ ";
         }
-       // bool pipe = false;
-       // bool inredir = false;
-       // bool outone = false;
-       // bool outtwo = false;
-        bool noinoutpipe = false;
+        bool noinoutpipe = true;
         getline(cin,line);
         size_t comment = line.find("#");
         if(comment != string::npos)
@@ -296,6 +398,20 @@ int main(int argc, char** argv)
             noinoutpipe = false;
             parsing_in(line);
             input(); 
+        }
+        size_t out = line.find(">");
+        if(out != string::npos && (line[out+1] != '>'))
+        {
+            noinoutpipe = false;
+            parsing_out(line);
+            output(); 
+        }
+        size_t out_two = line.find(">>");
+        if(out_two != string::npos)
+        {
+            noinoutpipe = false;
+            parsing_out_two(line);
+            output_two(); 
         }
         if(noinoutpipe)
         {
