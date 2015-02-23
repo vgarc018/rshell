@@ -106,7 +106,7 @@ void parsing(string & x)
         }
             a[i] = NULL;
             cmd.push_back(a);
-           // delete[] a;
+            delete[] a;
     }
 
     else
@@ -130,8 +130,8 @@ void parsing(string & x)
                  ++i;
              }
              a[i] = NULL;
-             //  delete [] a;
              cmd.push_back(a);
+             delete[] a;
 
         }
     }
