@@ -236,6 +236,7 @@ void input()
         perror("Error Opening");
     }
     int savedIn = dup(STDIN_FILENO);
+    if(savedIn == -1) perror("error in dup");
     if(dup2(in, STDIN_FILENO) == -1)
     {
         perror("Error in Dup");
@@ -295,6 +296,7 @@ void output()
         return;
     }
     int savedOut = dup(STDOUT_FILENO);
+    if(savedOut == -1) perror("error in dup");
     if(dup2(in, STDOUT_FILENO) == -1)
     {
         perror("Error in Dup");
@@ -373,6 +375,7 @@ void output_two()
         return;
     }
     int savedOut = dup(STDOUT_FILENO);
+    if(savedOut == -1) perror("Error in dup");
     if(dup2(in, STDOUT_FILENO) == -1)
     {
         perror("Error in Dup");
@@ -457,7 +460,7 @@ void piping(string s)
     }
     else
     {
-        wait(0);
+        if(wait(0) == -1) perror("Error in wait");
         if(close(fd[1]) == -1) perror("error in close");
         if(close(1) == -1) perror("Error in close");
         if(dup2(fd[0], 0) == -1) perror("Error in dup2");
