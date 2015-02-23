@@ -22,11 +22,6 @@
 using namespace std;
 using namespace boost;
 
-bool pipe1 = false;
-bool inredir = false;
-bool outone = false;
-bool outtwo = false;
-bool noinoutpipe = false;
 vector<string> p;
 
 int cexec(char** cmds)
@@ -272,8 +267,21 @@ void parsing_out(string s)
 
 void output()
 {
-    string cmd = p.at(0);
-    string file = p.at(1);
+    string cmd;
+    string flag;
+    string file;
+    if(p.size() >= 3)
+    {
+        cmd = p[0];
+        flag = p[1];
+        file = p[2];
+    }
+    else
+    {
+        cmd = p[0];
+        file = p[1];
+    }
+
     int in;
     if((in = open(file.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0666)) == -1)
     {
@@ -290,12 +298,24 @@ void output()
     {
         perror("closing fd");
     }
-    char *cmds[2];
-    cmds[0] = new char[cmd.size()+1];
-    strcpy(cmds[0], cmd.c_str());
-    cmds[1] = NULL;
-    cexec(cmds);
-    //delete [] cmds;
+    if(p.size() == 2)
+    {
+        char *cmds[2];
+        cmds[0] = new char[cmd.size()+1];
+        strcpy(cmds[0], cmd.c_str());
+        cmds[1] = NULL;
+        cexec(cmds);    
+    }
+    else
+    {
+        char *cmds[3];
+        cmds[0] = new char[cmd.size()+1];
+        strcpy(cmds[0], cmd.c_str());
+        cmds[1] = new char[flag.size()+1];
+        strcpy(cmds[1], flag.c_str());
+        cmds[2] = NULL;
+        cexec(cmds); 
+    }   //delete [] cmds;
     if(dup2(savedOut,STDOUT_FILENO) == -1)
     {
         perror("error in dup");
@@ -320,8 +340,20 @@ void parsing_out_two(string s)
 
 void output_two()
 {
-    string cmd = p.at(0);
-    string file = p.at(1);
+    string cmd;
+    string flag;
+    string file;
+    if(p.size() >= 3)
+    {
+        cmd = p[0];
+        flag = p[1];
+        file = p[2];
+    }
+    else
+    {
+        cmd = p[0];
+        file = p[1];
+    }
     int in;
     if((in = open(file.c_str(), O_WRONLY | O_CREAT | O_APPEND, 0666)) == -1)
     {
@@ -338,11 +370,24 @@ void output_two()
     {
         perror("closing fd");
     }
-    char *cmds[2];
-    cmds[0] = new char[cmd.size()+1];
-    strcpy(cmds[0], cmd.c_str());
-    cmds[1] = NULL;
-    cexec(cmds);
+    if(p.size() == 2)
+    {
+        char *cmds[2];
+        cmds[0] = new char[cmd.size()+1];
+        strcpy(cmds[0], cmd.c_str());
+        cmds[1] = NULL;
+        cexec(cmds);    
+    }
+    else
+    {
+        char *cmds[3];
+        cmds[0] = new char[cmd.size()+1];
+        strcpy(cmds[0], cmd.c_str());
+        cmds[1] = new char[flag.size()+1];
+        strcpy(cmds[1], flag.c_str());
+        cmds[2] = NULL;
+        cexec(cmds); 
+    }
     //delete [] cmds;
     if(dup2(savedOut,STDOUT_FILENO) == -1)
     {
@@ -353,6 +398,8 @@ void output_two()
         perror("Error in close");
     }
 }
+
+
 
 int main(int argc, char** argv)
 {
