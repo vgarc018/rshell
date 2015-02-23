@@ -105,8 +105,8 @@ void parsing(string & x)
             ++i;
         }
             a[i] = NULL;
-             //  delete [] a;
             cmd.push_back(a);
+           // delete[] a;
     }
 
     else
@@ -243,7 +243,7 @@ void input()
     cmds[0] = new char[cmd.size()+1];
     strcpy(cmds[0], cmd.c_str());
     cexec(cmds);
-    //delete [] cmds;
+    delete [] cmds[0];
     if(dup2(savedIn,STDIN_FILENO) == -1)
     {
         perror("error in dup");
@@ -305,6 +305,8 @@ void output()
         strcpy(cmds[0], cmd.c_str());
         cmds[1] = NULL;
         cexec(cmds);    
+        delete[] cmds[0];
+        delete[] cmds[1];
     }
     else
     {
@@ -315,6 +317,10 @@ void output()
         strcpy(cmds[1], flag.c_str());
         cmds[2] = NULL;
         cexec(cmds); 
+        delete[] cmds[0];
+        delete[] cmds[1];
+        delete[] cmds[2];
+
     }   //delete [] cmds;
     if(dup2(savedOut,STDOUT_FILENO) == -1)
     {
@@ -377,7 +383,8 @@ void output_two()
         strcpy(cmds[0], cmd.c_str());
         cmds[1] = NULL;
         cexec(cmds);    
-        delete [] cmds;
+        delete[] cmds[0];
+        delete[] cmds[1];
     }
     else
     {
@@ -388,6 +395,9 @@ void output_two()
         strcpy(cmds[1], flag.c_str());
         cmds[2] = NULL;
         cexec(cmds); 
+        delete[] cmds[0];
+        delete[] cmds[1];
+        delete[] cmds[2];
     }
     //delete [] cmds;
     if(dup2(savedOut,STDOUT_FILENO) == -1)
@@ -436,6 +446,8 @@ void piping(string s)
         strcpy(cmds[0], cmd.c_str());
         cmds[1] = NULL;
         cexec(cmds);
+        delete[] cmds[0];
+        delete[] cmds[1];
         //delete[] cmds;
     }
     else
@@ -453,7 +465,9 @@ void piping(string s)
         strcpy(cmds[1], flag.c_str());
         cmds[2] = NULL;
         cexec(cmds); 
-        //delete [] cmds;
+        delete [] cmds[0];
+        delete[] cmds[1];
+        delete[] cmds[2];
     }
 }
 int main(int argc, char** argv)
