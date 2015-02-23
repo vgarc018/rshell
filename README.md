@@ -6,6 +6,8 @@ runs until the user enters the command `exit`, it will not exit until it sees th
 The program now includes a ls program that works almost like the built in GNU ls command.
 It only supports 3 flags `-a    -l      -R`
 You can call it on directories and files as well.
+The program now supports IO Redirection `< > >>` the results are as expected.
+The program does not support piping at all it gives a segmentation fault.
 
 ##How to Install the Program:
 From your terminal run the following:
@@ -20,6 +22,7 @@ and you will be ready to run the program.
 Rshell
 1. If you type in ;;;;;;;;&&&&&&&||||||||||| you will get a segmentation fault.
 2. If you pass in the command true && true || false you will get a memory error
+3. Cannot handle any piping it give a segmentation fault 
 
 ls
 1. The output of the items are not in alphabetical order like the GNU built in command.
