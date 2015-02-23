@@ -139,7 +139,7 @@ void parsing(string & x)
     {
         char** temp = cmd[0];
         cexec(temp);
-        delete[] cmd[0];
+       // delete[] cmd[0];
         cmd.erase(cmd.begin());
         delete [] temp;
         return;
@@ -166,7 +166,7 @@ void parsing(string & x)
             temp[1] = NULL;
         }
         cexec(temp);
-        delete[] cmd[0];
+       // delete[] cmd[0];
         cmd.erase(cmd.begin());
 
         connectors.pop();
@@ -184,7 +184,7 @@ void parsing(string & x)
        }
        else
        {
-            delete[] cmd[0];
+           // delete[] cmd[0];
             cmd.erase(cmd.begin());
             connectors.pop();
             delete []temp;
@@ -196,7 +196,7 @@ void parsing(string & x)
        {
            return;
        }
-        delete[] cmd[0];
+       // delete[] cmd[0];
         cmd.erase(cmd.begin());
         connectors.pop();
         delete [] temp;
@@ -244,9 +244,10 @@ void input()
     {
         perror("closing fd");
     }
-    char *cmds[1];
+    char *cmds[2];
     cmds[0] = new char[cmd.size()+1];
     strcpy(cmds[0], cmd.c_str());
+    cmds[1] = NULL;
     cexec(cmds);
     delete [] cmds[0];
     if(dup2(savedIn,STDIN_FILENO) == -1)
