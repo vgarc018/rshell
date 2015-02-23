@@ -329,7 +329,7 @@ void output()
 
 void parsing_out_two(string s)
 {
-   typedef tokenizer<char_separator<char> > mytok;
+    typedef tokenizer<char_separator<char> > mytok;
     char_separator <char> space (" >> ");
     mytok tokens1 (s, space);
     for(mytok::iterator i = tokens1.begin(); i != tokens1.end(); ++i)
@@ -377,6 +377,7 @@ void output_two()
         strcpy(cmds[0], cmd.c_str());
         cmds[1] = NULL;
         cexec(cmds);    
+        delete [] cmds;
     }
     else
     {
@@ -399,8 +400,62 @@ void output_two()
     }
 }
 
-
-
+void piping(string s)
+{
+    typedef tokenizer<char_separator<char> > mytok;
+    char_separator <char> space (" | ");
+    mytok tokens1 (s, space);
+    vector<string> tokens;
+    for(mytok::iterator i = tokens1.begin(); i != tokens1.end(); ++i)
+    {
+        tokens.push_back(*i);
+    }
+    print(tokens);   
+    int fd[2];
+    if( pipe(fd) == -1)
+    {
+        perror("error in pipe");
+    }
+    int pid = fork();
+    if(pid == -1)
+    {
+        perror("error in fork");
+    }
+    int saveIn = dup(0);
+    if(saveIn == -1) perror("Error in dup");
+    int saveOut = dup(1);
+    if(saveOut == -1) perror("Error in dup");
+    if( pid == 0)
+    {
+        if(close(0) == -1) perror("close error");
+        if(dup2(fd[1], 1) == -1) perror("dup2 error");
+        if(close(fd[0]) == -1) perror("close error");
+        string cmd = tokens[0];
+        char *cmds[2];
+        cmds[0] = new char[cmd.size()+1];
+        strcpy(cmds[0], cmd.c_str());
+        cmds[1] = NULL;
+        cexec(cmds);
+        //delete[] cmds;
+    }
+    else
+    {
+        wait(0);
+        if(close(fd[1]) == -1) perror("error in close");
+        if(close(1) == -1) perror("Error in close");
+        if(dup2(fd[0], 0) == -1) perror("Error in dup2");
+        string cmd = tokens[1];
+        string flag = tokens[2];
+        char *cmds[3];
+        cmds[0] = new char[cmd.size()+1];
+        strcpy(cmds[0], cmd.c_str());
+        cmds[1] = new char[flag.size()+1];
+        strcpy(cmds[1], flag.c_str());
+        cmds[2] = NULL;
+        cexec(cmds); 
+        //delete [] cmds;
+    }
+}
 int main(int argc, char** argv)
 {
     string line;
@@ -460,6 +515,13 @@ int main(int argc, char** argv)
             parsing_out_two(line);
             output_two(); 
         }
+        size_t pi = line.find("|");
+        if(pi != string::npos && (line[out+1] != '|'))
+        {
+            noinoutpipe = false;
+            piping(line);
+        }
+
         if(noinoutpipe)
         {
             parsing(line);
