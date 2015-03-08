@@ -191,38 +191,22 @@ void connectors(string s, queue<string> &c)
   for(size_t i = 0; i < s.size(); i++)
   {
     if(s[i] == '|' && s[i+1] == '|')
-    {
-      c.push("||");
-    }
+        c.push("||");
+
     else if(s[i] == '|' && s[i+1] != '|')
-    {
       c.push("|");
-    }
     else if(s[i] == '<')
-    {
-      //cout << "in the queue" << endl;
       c.push("<");
-    }
     else if(s[i] == '>' && s[i+1] != '>' && s[i-1] != '>')
-    {
       c.push(">");
-    }
     else if(s[i] == '>' && s[i+1] == '>')
-    {
       c.push(">>");
-    }
     else if(s[i] == '|' && s[i+1] != '|')
-    {
       c.push("|");
-    }
     else if(s[i] == ';')
-    {
       c.push(";");
-    }
     else if(s[i] == '&' && s[i+1] == '&')
-    {
       c.push("&&");
-    }
   }
 }
 template <typename T>
