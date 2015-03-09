@@ -44,7 +44,7 @@ void outRedir(vector<string> &v);
 void outRedir2(vector<string> &v);
 void errRedir(vector<string> &v);
 void errRedir2(vector<string> &v);
-void input_2(vector<string> &v);
+//void input_2(vector<string> &v);
 void removeWhite(vector<string> &v);
 void piping(vector<string> &v, queue<string> &c);
 int inRedirPiping(string s);
@@ -142,7 +142,7 @@ int main()
     if(in2)
     {
         cout << "in input_2" << endl;
-        input_2(v);
+//        input_2(v);
         continue;
     }
     if(outt_1 != l)
@@ -404,6 +404,9 @@ int execvp_connectors(string s)
 
     return x;
   }
+  for(size_t i = 0; i < cmds.size()+1; ++i)
+        free(cm[i]);
+  free(cm);
   return 6;
 }
 
