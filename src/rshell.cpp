@@ -100,12 +100,22 @@ int main()
     //qprint(co);
     //vec_print(v);
     size_t input = line.find("<");
+    size_t out1 = line.find("1>");
+    //size_t 1out = line.find("1>");
+    //size_t 2outt = line.find("2>>");
+    //size_t 1outt = line.find("1>>");
     size_t out = line.find(">");
     size_t p = line.find("|");
     size_t l = string::npos;
     size_t semi = line.find(";");
     size_t orr = line.find("||");
     size_t andd = line.find("&&");
+    if(out1 != l)
+    {
+        outRedir(v);
+        continue;
+    }
+
     if(p != l && line[p+1] != '|')
     {
       piping(v, co);
@@ -468,6 +478,7 @@ void inRedir(vector<string> &v)
     perror("Error in closing Fd");
 
 }
+
 
 void outRedir(vector<string> &v)
 {
