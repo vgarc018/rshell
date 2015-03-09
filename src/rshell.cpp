@@ -379,6 +379,12 @@ int execvp_connectors(string s)
       if(exec == -1)
       {
         perror("error in Execv");
+        for(size_t i = 0; i < cmds.size()+1; ++i)
+        {
+            free(cm[i]);
+
+        }
+        free(cm);
         exit(1);
       }
   }
@@ -481,13 +487,13 @@ int hand_connectors(vector<string> &v, queue<string> &c)
   return -1;
 }
 
-void input_2(vector<string> &v)
+/*void input_2(vector<string> &v)
 {
     vector<string> s;
     string q = v[1];
     string l = "echo" + ' ' + q;
     cout << l << endl;
-}
+}*/
 
 void inRedir(vector<string> &v)
 {
