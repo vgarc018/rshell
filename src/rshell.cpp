@@ -44,6 +44,7 @@ void outRedir(vector<string> &v);
 void outRedir2(vector<string> &v);
 void errRedir(vector<string> &v);
 void errRedir2(vector<string> &v);
+void input_2(vector<string> &v);
 void removeWhite(vector<string> &v);
 void piping(vector<string> &v, queue<string> &c);
 int inRedirPiping(string s);
@@ -102,6 +103,7 @@ int main()
     //qprint(co);
     //vec_print(v);
     size_t input = line.find("<");
+    size_t input2 = line.find("<<<");
     size_t out1 = line.find("1>");
     size_t out2 = line.find("2>");
     size_t outt_2 = line.find("2>>");
@@ -113,10 +115,15 @@ int main()
     size_t orr = line.find("||");
     size_t andd = line.find("&&");
     bool err = false;
+    bool in2 = false;
     if(outt_2 != l)
     {
         errRedir2(v);
         continue;
+    }
+    if(input2 != l)
+    {
+        in2 = true;
     }
     if(out2 != l)
     {
@@ -132,6 +139,12 @@ int main()
         outRedir(v);
         continue;
     }
+    if(in2)
+    {
+        cout << "in input_2" << endl;
+        input_2(v);
+        continue;
+    }
     if(outt_1 != l)
     {
         outRedir2(v);
@@ -142,8 +155,9 @@ int main()
       piping(v, co);
       continue;
     }
-    else if(input != l)
+    else if(input != l && line[input+1] != '<')
     {
+      cout << "in input Redir" << endl;
       inRedir(v);
       continue;
     }
@@ -253,7 +267,7 @@ void qprint(queue<T> c)
 
 void parsing(string s, vector<string> &v)
 {
-  char_separator<char> connector(";||&&<>");
+  char_separator<char> connector(";||&&<>""");
   mytok tok (s, connector);
   for(tok_it i = tok.begin(); i != tok.end(); ++i)
   {
@@ -465,6 +479,14 @@ int hand_connectors(vector<string> &v, queue<string> &c)
   }
 
   return -1;
+}
+
+void input_2(vector<string> &v)
+{
+    vector<string> s;
+    string q = v[1];
+    string l = "echo" + ' ' + q;
+    cout << l << endl;
 }
 
 void inRedir(vector<string> &v)
