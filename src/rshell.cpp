@@ -44,7 +44,8 @@ void outRedir(vector<string> &v);
 void outRedir2(vector<string> &v);
 void errRedir(vector<string> &v);
 void errRedir2(vector<string> &v);
-//void input_2(vector<string> &v);
+void input_2(vector<string> &v);
+void outhelper(vector<string> &v);
 void removeWhite(vector<string> &v);
 void piping(vector<string> &v, queue<string> &c);
 int inRedirPiping(string s);
@@ -56,9 +57,6 @@ static inline std::string &trim(std::string &s);
 
 int main()
 {
-
-
-
   if( signal(SIGINT, SIG_IGN) == SIG_ERR )
       perror("Signal Error");
 
@@ -134,19 +132,23 @@ int main()
         errRedir(v);
         continue;
     }
-    if(out1 != l && line[out1+1] != '>') 
+    if(out1 != l) //&& line[out1+2] != '>') 
     {
+        outhelper(v);
+       // vec_print(v);
         outRedir(v);
         continue;
     }
     if(in2)
     {
-        cout << "in input_2" << endl;
-//        input_2(v);
+        //cout << "in input_2" << endl;
+        input_2(v);
         continue;
     }
     if(outt_1 != l)
     {
+        outhelper(v);
+        vec_print(v);
         outRedir2(v);
         continue;
     }
@@ -157,7 +159,7 @@ int main()
     }
     else if(input != l && line[input+1] != '<')
     {
-      cout << "in input Redir" << endl;
+      //cout << "in input Redir" << endl;
       inRedir(v);
       continue;
     }
@@ -490,13 +492,21 @@ int hand_connectors(vector<string> &v, queue<string> &c)
   return -1;
 }
 
-/*void input_2(vector<string> &v)
+void input_2(vector<string> &v)
 {
     vector<string> s;
+    queue<string> c;
+    c.push("|");
     string q = v[1];
-    string l = "echo" + ' ' + q;
-    cout << l << endl;
-}*/
+    string e = "echo";
+    string st = q.substr(1,q.size()-2);
+    string full = e + " " + st;
+    string ca = "cat";
+    s.push_back(full);
+    s.push_back(ca);
+    piping(s, c);
+    
+}
 
 void inRedir(vector<string> &v)
 {
@@ -535,7 +545,18 @@ void errRedir(vector<string> &v)
 {
   string cmd = v.at(0);
   string file = v.at(1);
-
+  string full = cmd + " " + file;
+  vector<string> cmds;
+  char_separator<char> space ("2");
+  mytok cmd_toks(full, space);
+  for(tok_it i = cmd_toks.begin(); i != cmd_toks.end(); ++i)
+  {
+   cmds.push_back(*i);
+  }
+  removeWhite(cmds);
+  //vec_print(cmds);
+  cmd = cmds.at(0);
+  file = cmds.at(1);
   int in = open(file.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0666);
   if(in == -1)
   {
@@ -546,7 +567,7 @@ void errRedir(vector<string> &v)
   int savedErr = dup(2);
   if(savedErr == -1)
     perror("Error in dup");
-  cout << "in Err" << endl;
+  //cout << "in Err" << endl;
   if(dup2(in, 2) == -1)
   {
     perror("Error in Dup2");
@@ -570,7 +591,18 @@ void errRedir2(vector<string> &v)
 {
   string cmd = v.at(0);
   string file = v.at(1);
-
+  string full = cmd + " " + file;
+  vector<string> cmds;
+  char_separator<char> space ("2");
+  mytok cmd_toks(full, space);
+  for(tok_it i = cmd_toks.begin(); i != cmd_toks.end(); ++i)
+  {
+   cmds.push_back(*i);
+  }
+  removeWhite(cmds);
+  //vec_print(cmds);
+  cmd = cmds.at(0);
+  file = cmds.at(1);
   int in = open(file.c_str(), O_WRONLY | O_CREAT | O_APPEND, 0666);
   if(in == -1)
   {
@@ -602,6 +634,23 @@ void errRedir2(vector<string> &v)
    
 }
 
+void outhelper(vector<string> &v)
+{
+  string cmd = v.at(0);
+  string file = v.at(1);
+  string full = cmd + " " + file;
+  vector<string> cmds;
+  char_separator<char> space ("1");
+  mytok cmd_toks(full, space);
+  for(tok_it i = cmd_toks.begin(); i != cmd_toks.end(); ++i)
+  {
+   cmds.push_back(*i);
+  }
+  removeWhite(cmds);
+  //vec_print(cmds);
+  v[0] = cmds.at(0);
+  v[1] = cmds.at(1);
+}
 
 void outRedir(vector<string> &v)
 {
