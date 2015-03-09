@@ -1,0 +1,251 @@
+Script started on Sun 08 Mar 2015 09:59:14 PM PDT
+~
+vgarc018@hammer $ cs100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd CS100/rshell/
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (master) [0;36m$[0m ls
+bin  coutRedir.cpp  LICENSE  Makefile  README.md  src  test  typescript
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (master) [0;36m$[0m make
+g++ -Wall -Werror -ansi -pedantic ./src/rshell.cpp -o ./bin/rshell
+g++ -Wall -Werror -ansi -pedantic ./src/ls.cpp -o ./bin/ls
+g++ -Wall -Werror -ansi -pedantic ./src/cp.cpp -o ./bin/cp
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (master) [0;36m$[0m bin/rshell 
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ #all compa  mands are now ran with execv and function the same as before
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ls
+bin  coutRedir.cpp  LICENSE  Makefile  README.md  src  test  typescript
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ls -a
+.  ..  bin  coutRedir.cpp  .git  LICENSE  Makefile  README.md  src  test  typescript
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ls -l
+total 44
+drwx------ 2 vgarc018 csmajs  4096 Mar  8 21:55 bin
+-rw------- 1 vgarc018 csmajs   227 Mar  8 19:17 coutRedir.cpp
+-rw------- 1 vgarc018 csmajs 18027 Mar  8 17:49 LICENSE
+-rw------- 1 vgarc018 csmajs   291 Mar  8 17:49 Makefile
+-rw------- 1 vgarc018 csmajs  1282 Mar  8 17:49 README.md
+drwx------ 2 vgarc018 csmajs  4096 Mar  8 21:54 src
+drwx------ 2 vgarc018 csmajs  4096 Mar  8 17:49 test
+-rw------- 1 vgarc018 csmajs     0 Mar  8 21:54 typescript
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ which ls
+/bin/ls
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ cat Makefile
+SRCDIR=./src
+BINDIR=./bin
+
+all:
+	@mkdir -p $(BINDIR)
+	g++ -Wall -Werror -ansi -pedantic $(SRCDIR)/rshell.cpp -o $(BINDIR)/rshell
+	g++ -Wall -Werror -ansi -pedantic $(SRCDIR)/ls.cpp -o $(BINDIR)/ls
+	g++ -Wall -Werror -ansi -pedantic $(SRCDIR)/cp.cpp -o $(BINDIR)/cp
+
+clean:
+	@rm -r $(BINDIR)
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ which cat
+/bin/cat
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ which which
+/usr/bin/which
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ which cs100
+/usr/csshare/cs100/bin/cs100
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ cs100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m exit
+exit
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ #you can change directi ories with cd 
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ #cd with no arguments takes you to the home directory
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ cd 
+
+/home/csmajs/vgarc018
+vgarc018@hammer.cs.ucr.edu$ pwd
+/home/csmajs/vgarc018
+
+/home/csmajs/vgarc018
+vgarc018@hammer.cs.ucr.edu$ cd /
+
+/
+vgarc018@hammer.cs.ucr.edu$ pwd
+/
+
+/
+vgarc018@hammer.cs.ucr.edu$ cd
+
+/home/csmajs/vgarc018
+vgarc018@hammer.cs.ucr.edu$ #the path updates everytime a rshe    cd is called
+
+/home/csmajs/vgarc018
+vgarc018@hammer.cs.ucr.edu$ cd Cs100    S100
+
+/home/csmajs/vgarc018/CS100
+vgarc018@hammer.cs.ucr.edu$ #trying cd with a file that doesnt exist
+
+/home/csmajs/vgarc018/CS100
+vgarc018@hammer.cs.ucr.edu$ cd asdskjd
+Error in chdir: No such file or directory
+
+/home/csmajs/vgarc018/CS100
+vgarc018@hammer.cs.ucr.edu$ cd /root #i have no permission for this
+Error in chdir: Permission denied
+
+/home/csmajs/vgarc018/CS100
+vgarc018@hammer.cs.ucr.edu$ cd rshell
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ cd bin
+
+/home/csmajs/vgarc018/CS100/rshell/bin
+vgarc018@hammer.cs.ucr.edu$ ls
+[32mrshell[0m  [32mls[0m  [32mcp[0m  
+
+
+/home/csmajs/vgarc018/CS100/rshell/bin
+vgarc018@hammer.cs.ucr.edu$ cd ..
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ls
+bin  coutRedir.cpp  LICENSE  Makefile  README.md  src  test  typescript
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ #Ctrl -C does nothing in rshell parent
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ^C^C^C^C^C^C^C^Cla
+error in Execv: No such file or directory
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ^C^C^C^C^C^C^C^C^Cls
+bin  coutRedir.cpp  LICENSE  Makefile  README.md  src  test  typescript
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ running a child process will quit with                                        #running a child process wit ll quit with Ctrl C
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ cat
+
+
+
+
+
+
+^C
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ping google.com
+PING google.com (216.58.216.46) 56(84) bytes of data.
+^C
+--- google.com ping statistics ---
+6 packets transmitted, 0 received, 100% packet loss, time 5419ms
+
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ps
+  PID TTY          TIME CMD
+26488 pts/59   00:00:00 bash
+26552 pts/59   00:00:00 rshell
+29377 pts/59   00:00:00 ps
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ cd  vim     cat hello
+cat: hello: No such file or directory
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ cat 
+hello
+hello
+hi 
+hi 
+exit
+exit
+^C
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ ^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ #you can pass in a long path to cd as well
+
+/home/csmajs/vgarc018/CS100/rshell
+vgarc018@hammer.cs.ucr.edu$ cd ../../cs12  /
+
+/home/csmajs/vgarc018/cs12
+vgarc018@hammer.cs.ucr.edu$ ls
+Assin1	Assin3	Assin5	Assin7	assn8  Lab10  lab3  lab5  Lab7	Lab9
+Assin2	Assin4	Assin6	Assin8	lab1   lab2   Lab4  Lab6  Lab8	upload_tests
+
+/home/csmajs/vgarc018/cs12
+vgarc018@hammer.cs.ucr.edu$ cd ../Cs100    S100/rshell/src
+
+/home/csmajs/vgarc018/CS100/rshell/src
+vgarc018@hammer.cs.ucr.edu$ ls
+cp.cpp	ls.cpp	rshell.cpp  Timer.h
+
+/home/csmajs/vgarc018/CS100/rshell/src
+vgarc018@hammer.cs.ucr.edu$ exit
+Thanks for using Rshell
+[s%%%%%%%%%%[u[0;32mvgarc018[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (master) [0;36m$[0m exit
+exit
+~
+vgarc018@hammer $ exit
+exit
+
+Script done on Sun 08 Mar 2015 10:08:29 PM PDT

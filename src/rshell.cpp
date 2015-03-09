@@ -100,7 +100,7 @@ int main()
     connectors(line, co);
     removeWhite(v);
     //qprint(co);
-    vec_print(v);
+    //vec_print(v);
     size_t input = line.find("<");
     size_t out1 = line.find("1>");
     size_t out2 = line.find("2>");
