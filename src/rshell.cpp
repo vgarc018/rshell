@@ -42,6 +42,8 @@ int hand_connectors(vector<string> &s, queue<string> &c);
 void inRedir(vector<string> &v);
 void outRedir(vector<string> &v);
 void outRedir2(vector<string> &v);
+void errRedir(vector<string> &v);
+void errRedir2(vector<string> &v);
 void removeWhite(vector<string> &v);
 void piping(vector<string> &v, queue<string> &c);
 int inRedirPiping(string s);
@@ -98,11 +100,11 @@ int main()
     connectors(line, co);
     removeWhite(v);
     //qprint(co);
-    //vec_print(v);
+    vec_print(v);
     size_t input = line.find("<");
     size_t out1 = line.find("1>");
-    //size_t 1out = line.find("1>");
-    //size_t 2outt = line.find("2>>");
+    size_t out2 = line.find("2>");
+    size_t outt_2 = line.find("2>>");
     size_t outt_1 = line.find("1>>");
     size_t out = line.find(">");
     size_t p = line.find("|");
@@ -110,6 +112,16 @@ int main()
     size_t semi = line.find(";");
     size_t orr = line.find("||");
     size_t andd = line.find("&&");
+    if(out2 != l && line[out2+1] != '>')
+    {
+        errRedir(v);
+        continue;
+    }
+    if(outt_2 != l)
+    {
+        errRedir2(v);
+        continue;
+    }
     if(out1 != l && line[out1+1] != '>') 
     {
         outRedir(v);
@@ -481,6 +493,77 @@ void inRedir(vector<string> &v)
   if(close(savedIn) == -1)
     perror("Error in closing Fd");
 
+}
+
+void errRedir(vector<string> &v)
+{
+  string cmd = v.at(0);
+  string file = v.at(1);
+
+  int in = open(file.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0666);
+  if(in == -1)
+  {
+    perror("Error in Opening");
+    return;
+  }
+
+  int savedErr = dup(2);
+  if(savedErr == -1)
+    perror("Error in dup");
+  cout << "in Err" << endl;
+  if(dup2(in, 2) == -1)
+  {
+    perror("Error in Dup2");
+    return;
+  }
+
+  if(close(in) == -1)
+    perror("Closing fd");
+
+  execvp_connectors(cmd);
+
+  if(dup2(savedErr, 2) == -1)
+    perror("Error in Dup2");
+
+  if(close(savedErr) == -1)
+    perror("Error Closing file");
+
+}
+
+void errRedir2(vector<string> &v)
+{
+  string cmd = v.at(0);
+  string file = v.at(1);
+
+  int in = open(file.c_str(), O_WRONLY | O_CREAT | O_APPEND, 0666);
+  if(in == -1)
+  {
+    perror("Error in Opening");
+    return;
+  }
+
+  int savedErr = dup(2);
+  if(savedErr == -1)
+    perror("Error in dup");
+
+  if(dup2(in, 2) == -1)
+  {
+    perror("Error in Dup2");
+    return;
+  }
+
+  if(close(in) == -1)
+    perror("Closing fd");
+
+  execvp_connectors(cmd);
+
+  if(dup2(savedErr, 2) == -1)
+    perror("Error in Dup2");
+
+  if(close(savedErr) == -1)
+    perror("Error Closing file");
+
+   
 }
 
 
