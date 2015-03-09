@@ -112,14 +112,19 @@ int main()
     size_t semi = line.find(";");
     size_t orr = line.find("||");
     size_t andd = line.find("&&");
-    if(out2 != l && line[out2+1] != '>')
-    {
-        errRedir(v);
-        continue;
-    }
+    bool err = false;
     if(outt_2 != l)
     {
         errRedir2(v);
+        continue;
+    }
+    if(out2 != l)
+    {
+        err = true;
+    }
+    if(err)
+    {
+        errRedir(v);
         continue;
     }
     if(out1 != l && line[out1+1] != '>') 
