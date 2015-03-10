@@ -1,0 +1,45 @@
+#input redirection 
+#testing from an existing file
+cat < test_file
+#testing for non_existing file
+cat < nonfile
+#testing with a space
+cat      <      test_file
+#testing with outspace
+cat<test_file
+#testing with piping
+cat < test_file | grep test
+#testing output redirection
+#existing file
+touch file2
+cat Makefile > file2
+cat file2
+#nonexisting file
+cat Makefile > nonexistent
+cat nonexistent
+#testing >>
+touch file4
+cat Makefile >> file4
+cat file4
+#nonexisting file
+cat Makefile >> nonexistent2
+cat nonexistent2
+#output with out spaces
+cat Makefile>file6
+cat file6
+cat Makefile>>file7
+cat file7
+#piping test cases
+cat Makefile | grep g++
+#piping with more then one pipe
+cat Makfile | tr a-z A-Z | grep rshell
+#piping without space
+cat Makfile|tr a-z A-Z|grep rshell
+#piping with out put ridirection
+cat Makfile | tr a-z A-Z | grep rshell > file9
+cat file9
+cat < Makefile | tr A-Z a-z | tee newOutputFile1 | tr a-z A-Z > newOutputFile2
+cat newOutputFile1
+cat newOutputFile2
+exit
+
